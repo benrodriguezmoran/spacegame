@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp2255hmio8si"]
+
+[ext_resource type="Script" path="res://scripts/ship_controller.gd" id="1_h4sv5"]
+[ext_resource type="PackedScene" uid="uid://byipdbixrd3wy" path="res://scenes/parts/structure_block.tscn" id="2_urum7"]
+
+[node name="Ship Controller" type="RigidBody3D"]
+script = ExtResource("1_h4sv5")
+
+[node name="Block" parent="." instance=ExtResource("2_urum7")]

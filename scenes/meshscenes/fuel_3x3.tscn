@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyggffd5lxk8"]
+
+[ext_resource type="ArrayMesh" uid="uid://gejso8vkmt5n" path="res://models/fuel3x3.obj" id="1_xo6sx"]
+
+[node name="highlight" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_xo6sx")

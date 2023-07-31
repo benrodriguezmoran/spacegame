@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://celw4e4qcul3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lnq33"]
+albedo_color = Color(0.501961, 0.545098, 0.705882, 1)
+emission = Color(0, 0, 0.964706, 1)
+emission_energy_multiplier = 7.16
+
+[sub_resource type="PrismMesh" id="PrismMesh_g8pho"]
+material = SubResource("StandardMaterial3D_lnq33")
+size = Vector3(3, 3, 3)
+
+[node name="Preselect" type="Area3D"]
+collision_layer = 0
+input_ray_pickable = false
+
+[node name="Node3D6" type="MeshInstance3D" parent="."]
+mesh = SubResource("PrismMesh_g8pho")
+
+[node name="Node3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.487, 0, 0, 0, 0.487, 0, 0, 0, 0.487, 0, 0, -6)
+mesh = SubResource("PrismMesh_g8pho")
+
+[node name="Node3D8" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.487, 0, 0, 0, 0.487, 0, 0, 0, 0.487, 0, -3, -6)
+mesh = SubResource("PrismMesh_g8pho")
+
+[node name="Node3D10" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.487, 0, 0, 0, 0.487, 0, 0, 0, 0.487, 0, 0, -3)
+mesh = SubResource("PrismMesh_g8pho")
+
+[node name="Node3D11" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.487, 0, 0, 0, 0.487, 0, 0, 0, 0.487, 0, -3, -3)
+mesh = SubResource("PrismMesh_g8pho")
+
+[node name="Node3D9" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.487, 0, 0, 0, 0.487, 0, 0, 0, 0.487, 0, -3, 0)
+mesh = SubResource("PrismMesh_g8pho")

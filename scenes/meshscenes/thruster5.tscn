@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6n20q36aalrm"]
+
+[ext_resource type="ArrayMesh" uid="uid://ceahyaekxw87n" path="res://models/thruster5.obj" id="1_yr8xg"]
+
+[node name="highlight" type="Node3D"]
+
+[node name="Thruster5" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_yr8xg")

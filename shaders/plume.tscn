@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=3 uid="uid://cx0o03qn8t872"]
+
+[ext_resource type="Shader" path="res://shaders/plume.gdshader" id="1_x5sl1"]
+
+[sub_resource type="Gradient" id="Gradient_8ejiw"]
+offsets = PackedFloat32Array(0, 0.989547)
+colors = PackedColorArray(0.560955, 0.560955, 0.560955, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0cnn4"]
+gradient = SubResource("Gradient_8ejiw")
+fill_from = Vector2(0.521368, 0)
+fill_to = Vector2(0.529915, 0.380342)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_i623k"]
+offset = Vector3(0.34, 0, 0)
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sw5rf"]
+seamless = true
+seamless_blend_skirt = 0.304
+noise = SubResource("FastNoiseLite_i623k")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gjmbr"]
+noise_type = 0
+frequency = 0.053
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1kinb"]
+noise = SubResource("FastNoiseLite_gjmbr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2awsw"]
+render_priority = 0
+shader = ExtResource("1_x5sl1")
+shader_parameter/emission = null
+shader_parameter/alpha = 0.524
+shader_parameter/thrust = 0.334
+shader_parameter/acceleration = 0.468
+shader_parameter/speed = 3.714
+shader_parameter/speed2 = 2.035
+shader_parameter/height = 1.0
+shader_parameter/tail_mult = 1.0
+shader_parameter/color = SubResource("GradientTexture2D_0cnn4")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_sw5rf")
+shader_parameter/noise_texture2 = SubResource("NoiseTexture2D_1kinb")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_a57vx"]
+material = SubResource("ShaderMaterial_2awsw")
+top_radius = 9.945
+bottom_radius = 1.15
+cap_top = false
+cap_bottom = false
+
+[node name="plume" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.50446, 0)
+mesh = SubResource("CylinderMesh_a57vx")
+skeleton = NodePath("../..")

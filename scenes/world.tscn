@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://dla6rwishj5vb"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_nrpeo"]
+[ext_resource type="Script" path="res://scripts/UI_controller.gd" id="2_pbsoq"]
+[ext_resource type="Environment" uid="uid://dckas8pn11ksi" path="res://environment.tres" id="3_d7swh"]
+[ext_resource type="PackedScene" uid="uid://coa11mnhy1ph8" path="res://scenes/_player.tscn" id="3_vrwyv"]
+[ext_resource type="PackedScene" uid="uid://cwbf0vqnf4a0c" path="res://scenes/ship.tscn" id="8_aicjf"]
+
+[sub_resource type="World3D" id="World3D_qwyru"]
+environment = ExtResource("3_d7swh")
+
+[node name="world" type="Node"]
+script = ExtResource("1_nrpeo")
+
+[node name="UI_controller" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_pbsoq")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UI_controller"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 323.0
+offset_top = 61.0
+offset_right = -317.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="UI_controller/SubViewportContainer"]
+own_world_3d = true
+world_3d = SubResource("World3D_qwyru")
+handle_input_locally = false
+render_target_update_mode = 0
+
+[node name="Camera3D" type="Camera3D" parent="UI_controller/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 146.823)
+size = 70.622
+far = 16384.0
+
+[node name="Node3D" type="Node3D" parent="UI_controller/SubViewportContainer/SubViewport"]
+
+[node name="frame" type="Node3D" parent="."]
+
+[node name="Player" parent="frame" instance=ExtResource("3_vrwyv")]
+
+[node name="Ship Controller" parent="frame" instance=ExtResource("8_aicjf")]
+transform = Transform3D(1, 0, 0, 0, -0.119565, -0.992826, 0, 0.992826, -0.119565, -0.342268, 3.79498, -13.544)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_d7swh")
+
+[editable path="frame/Ship Controller"]

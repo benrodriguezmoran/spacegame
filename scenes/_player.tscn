@@ -1,0 +1,214 @@
+[gd_scene load_steps=27 format=3 uid="uid://coa11mnhy1ph8"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_w4ci4"]
+[ext_resource type="Script" path="res://scripts/block_placer.gd" id="2_w0s5i"]
+[ext_resource type="Script" path="res://scripts/fps.gd" id="3_6xag1"]
+[ext_resource type="Script" path="res://scripts/player_ui.gd" id="3_x2ja2"]
+[ext_resource type="Script" path="res://scripts/jetpack_component.gd" id="5_8qltw"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_epsm5"]
+radial_segments = 14
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5t61o"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_pqvmg"]
+action = &"hotbar_1"
+
+[sub_resource type="Shortcut" id="Shortcut_gysjc"]
+events = [SubResource("InputEventAction_pqvmg")]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5axd0"]
+size = Vector2(32, 32)
+
+[sub_resource type="InputEventAction" id="InputEventAction_awlnj"]
+action = &"hotbar_2"
+
+[sub_resource type="Shortcut" id="Shortcut_g0niv"]
+events = [SubResource("InputEventAction_awlnj")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_6mswf"]
+action = &"hotbar_3"
+
+[sub_resource type="Shortcut" id="Shortcut_kfnuk"]
+events = [SubResource("InputEventAction_6mswf")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_3xr2j"]
+action = &"hotbar_4"
+
+[sub_resource type="Shortcut" id="Shortcut_hq8fa"]
+events = [SubResource("InputEventAction_3xr2j")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_w22jr"]
+action = &"hotbar_5"
+
+[sub_resource type="Shortcut" id="Shortcut_uyn86"]
+events = [SubResource("InputEventAction_w22jr")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_nfydq"]
+action = &"hotbar_6"
+
+[sub_resource type="Shortcut" id="Shortcut_qyqvk"]
+events = [SubResource("InputEventAction_nfydq")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_uo3xv"]
+action = &"hotbar_7"
+
+[sub_resource type="Shortcut" id="Shortcut_pama1"]
+events = [SubResource("InputEventAction_uo3xv")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_732p5"]
+action = &"hotbar_8"
+
+[sub_resource type="Shortcut" id="Shortcut_uddba"]
+events = [SubResource("InputEventAction_732p5")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_5gn8l"]
+action = &"hotbar_9"
+
+[sub_resource type="Shortcut" id="Shortcut_fb2mj"]
+events = [SubResource("InputEventAction_5gn8l")]
+
+[node name="Player" type="RigidBody3D"]
+rotation_edit_mode = 2
+mass = 100.0
+script = ExtResource("1_w4ci4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_epsm5")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_5t61o")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 0.476, -0.128418)
+current = true
+fov = 110.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.653888, 0)
+light_energy = 9.983
+spot_range = 321.672
+spot_attenuation = 1.36604
+spot_angle = 53.87
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.653888, 0)
+light_energy = 9.983
+spot_range = 321.672
+spot_attenuation = 1.36604
+spot_angle = 53.87
+
+[node name="block_placer" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.459441, 0)
+target_position = Vector3(0, -10.005, 0)
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("2_w0s5i")
+
+[node name="jetpack_component" type="Node" parent="."]
+script = ExtResource("5_8qltw")
+
+[node name="player_UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_x2ja2")
+
+[node name="hotbar" type="HBoxContainer" parent="player_UI"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Button" type="Button" parent="player_UI/hotbar"]
+custom_minimum_size = Vector2(16, 24)
+layout_mode = 2
+shortcut = SubResource("Shortcut_gysjc")
+text = "1"
+icon = SubResource("PlaceholderTexture2D_5axd0")
+icon_alignment = 1
+
+[node name="Button2" type="Button" parent="player_UI/hotbar"]
+custom_minimum_size = Vector2(16, 24)
+layout_mode = 2
+shortcut = SubResource("Shortcut_g0niv")
+text = "2"
+icon = SubResource("PlaceholderTexture2D_5axd0")
+icon_alignment = 1
+
+[node name="Button3" type="Button" parent="player_UI/hotbar"]
+custom_minimum_size = Vector2(16, 24)
+layout_mode = 2
+shortcut = SubResource("Shortcut_kfnuk")
+text = "3"
+icon = SubResource("PlaceholderTexture2D_5axd0")
+icon_alignment = 1
+
+[node name="Button4" type="Button" parent="player_UI/hotbar"]
+custom_minimum_size = Vector2(16, 24)
+layout_mode = 2
+shortcut = SubResource("Shortcut_hq8fa")
+text = "4"
+icon = SubResource("PlaceholderTexture2D_5axd0")
+icon_alignment = 1
+
+[node name="Button5" type="Button" parent="player_UI/hotbar"]
+custom_minimum_size = Vector2(16, 24)
+layout_mode = 2
+shortcut = SubResource("Shortcut_uyn86")
+text = "5"
+icon = SubResource("PlaceholderTexture2D_5axd0")
+icon_alignment = 1
+
+[node name="Button6" type="Button" parent="player_UI/hotbar"]
+custom_minimum_size = Vector2(16, 24)
+layout_mode = 2
+shortcut = SubResource("Shortcut_qyqvk")
+text = "6"
+icon = SubResource("PlaceholderTexture2D_5axd0")
+icon_alignment = 1
+
+[node name="Button7" type="Button" parent="player_UI/hotbar"]
+custom_minimum_size = Vector2(16, 24)
+layout_mode = 2
+shortcut = SubResource("Shortcut_pama1")
+text = "7"
+icon = SubResource("PlaceholderTexture2D_5axd0")
+icon_alignment = 1
+
+[node name="Button8" type="Button" parent="player_UI/hotbar"]
+custom_minimum_size = Vector2(16, 24)
+layout_mode = 2
+shortcut = SubResource("Shortcut_uddba")
+text = "8"
+icon = SubResource("PlaceholderTexture2D_5axd0")
+icon_alignment = 1
+
+[node name="Button9" type="Button" parent="player_UI/hotbar"]
+custom_minimum_size = Vector2(16, 24)
+layout_mode = 2
+shortcut = SubResource("Shortcut_fb2mj")
+text = "9"
+icon = SubResource("PlaceholderTexture2D_5axd0")
+icon_alignment = 1
+
+[node name="FPS" type="Label" parent="player_UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+script = ExtResource("3_6xag1")
+
+[connection signal="block_selection" from="player_UI" to="block_placer" method="_on_player_ui_block_selection"]

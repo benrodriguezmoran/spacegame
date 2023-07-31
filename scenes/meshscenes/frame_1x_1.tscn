@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://3q2cgixlre2n"]
+
+[ext_resource type="ArrayMesh" uid="uid://dum5f8iy7gwts" path="res://models/frame1x1.obj" id="1_jgk03"]
+
+[node name="highlight" type="MeshInstance3D"]
+mesh = ExtResource("1_jgk03")
