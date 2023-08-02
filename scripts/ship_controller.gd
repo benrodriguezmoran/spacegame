@@ -71,6 +71,7 @@ func remove_block(target) -> void:
 	for subblock in targetSubblocks:
 		blocks.erase(blocks.find_key(subblock))
 		subblock.remove()
+	update_structure()
 	update_mass()
 
 func update_mass():
@@ -94,6 +95,52 @@ func update_mass():
 	mass = totalMass
 	center_of_mass = centerOfMass
 
+
+	
+func update_structure():
+	
+	var checked = []
+	var connected = []
+	var recursive = func(pos, recursive):
+
+		checked.append(pos)
+		connected.append(pos)
+		var neighbors = get_neighbors(pos)
+		print(neighbors)
+		for neighbor in neighbors:
+			if !checked.has(neighbor):
+				print("second check")
+				recursive.call(neighbor, recursive)
+				
+	
+	var randblock = blocks.keys()[randi_range(0,blocks.size()-1)]
+	recursive.call(randblock, recursive)
+	
+	
+	if blocks.size() == checked.size():
+		return
+	else:
+		print("DISCONNECT")
+
+
+	
+
+func get_neighbors(blockpos):
+	var neighbors = []
+	for x in [-1,1]:
+		var neighbor = blockpos + Vector3(x,0,0)
+		if blocks.has(neighbor):
+			neighbors.append(neighbor)
+	for y in [-1,1]:
+		var neighbor = blockpos + Vector3(0,y,0)
+		if blocks.has(neighbor):
+			neighbors.append(neighbor)
+	for z in [-1,1]:
+		var neighbor = blockpos + Vector3(0,0,z)
+		if blocks.has(neighbor):
+			neighbors.append(neighbor)
+	return neighbors
+			
 func get_dictionary():
 	return blocks	
 		
