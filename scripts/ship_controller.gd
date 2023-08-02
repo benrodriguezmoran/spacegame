@@ -98,31 +98,36 @@ func update_mass():
 
 	
 func update_structure():
-	
+	var fragments = []
 	var checked = []
-	var connected = []
-	var recursive = func(pos, recursive):
-
-		checked.append(pos)
-		connected.append(pos)
+	var connected:Array
+	
+	var recursive = func(pos, recursive, firstCall):
+		
+		if firstCall:
+			connected.clear()
+		if !checked.has(pos):
+			checked.append(pos)
+			connected.append(pos)
 		var neighbors = get_neighbors(pos)
-		print(neighbors)
 		for neighbor in neighbors:
 			if !checked.has(neighbor):
-				print("second check")
-				recursive.call(neighbor, recursive)
-				
-	
-	var randblock = blocks.keys()[randi_range(0,blocks.size()-1)]
-	recursive.call(randblock, recursive)
-	
-	
+				recursive.call(neighbor, recursive, false)
+		return connected
+	var randblock = blocks.keys().pick_random()
+	var firstreccall = recursive.call(randblock, recursive, true)
+	fragments.append(firstreccall)
 	if blocks.size() == checked.size():
 		return
 	else:
-		print("DISCONNECT")
-
-
+		var notChecked = blocks.keys()
+		
+		while blocks.size() > checked.size():
+			for check in checked:
+				notChecked.erase(check)
+			var fragment = recursive.call(notChecked.pick_random(), recursive, true)
+			fragments.append(fragment)
+		print(fragments)
 	
 
 func get_neighbors(blockpos):
