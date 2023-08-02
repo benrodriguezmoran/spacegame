@@ -102,20 +102,18 @@ func update_structure():
 	var checked = []
 	var connected:Array
 	
-	var recursive = func(pos, recursive, firstCall):
-		
-		if firstCall:
-			connected.clear()
+	var recursive = func(pos, recursive, connectionArray:Array):
+	
 		if !checked.has(pos):
 			checked.append(pos)
-			connected.append(pos)
+			connectionArray.append(pos)
 		var neighbors = get_neighbors(pos)
 		for neighbor in neighbors:
 			if !checked.has(neighbor):
-				recursive.call(neighbor, recursive, false)
-		return connected
+				recursive.call(neighbor, recursive, connectionArray)
+		return connectionArray
 	var randblock = blocks.keys().pick_random()
-	var firstreccall = recursive.call(randblock, recursive, true)
+	var firstreccall = recursive.call(randblock, recursive, Array())
 	fragments.append(firstreccall)
 	if blocks.size() == checked.size():
 		return
@@ -125,7 +123,7 @@ func update_structure():
 		while blocks.size() > checked.size():
 			for check in checked:
 				notChecked.erase(check)
-			var fragment = recursive.call(notChecked.pick_random(), recursive, true)
+			var fragment = recursive.call(notChecked.pick_random(), recursive, Array())
 			fragments.append(fragment)
 		print(fragments)
 	
