@@ -50,6 +50,8 @@ far = 16384.0
 [node name="frame" type="Node3D" parent="."]
 
 [node name="Player" parent="frame" instance=ExtResource("3_vrwyv")]
+transform = Transform3D(0.504343, -0.427453, 0.750282, 0.520523, 0.843767, 0.130816, -0.688981, 0.324563, 0.648047, 0, 0, 0)
+rotation_edit_mode = 1
 
 [node name="Ship Controller" parent="frame" instance=ExtResource("8_aicjf")]
 transform = Transform3D(1, 0, 0, 0, -0.119565, -0.992826, 0, 0.992826, -0.119565, -0.342268, 3.79498, -13.544)

@@ -112,6 +112,7 @@ func update_structure():
 			if !checked.has(neighbor):
 				recursive.call(neighbor, recursive, connectionArray)
 		return connectionArray
+	
 	var randblock = blocks.keys().pick_random()
 	var firstreccall = recursive.call(randblock, recursive, Array())
 	fragments.append(firstreccall)
@@ -126,6 +127,10 @@ func update_structure():
 			var fragment = recursive.call(notChecked.pick_random(), recursive, Array())
 			fragments.append(fragment)
 		print(fragments)
+		
+
+func new_ship(blocks):
+	pass
 	
 
 func get_neighbors(blockpos):

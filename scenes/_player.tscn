@@ -69,7 +69,6 @@ action = &"hotbar_9"
 events = [SubResource("InputEventAction_5gn8l")]
 
 [node name="Player" type="RigidBody3D"]
-rotation_edit_mode = 2
 mass = 100.0
 script = ExtResource("1_w4ci4")
 
