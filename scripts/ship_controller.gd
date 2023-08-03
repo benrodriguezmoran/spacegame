@@ -127,10 +127,13 @@ func update_structure():
 			var fragment = recursive.call(notChecked.pick_random(), recursive, Array())
 			fragments.append(fragment)
 		print(fragments)
+		for fragment in fragments:
+			new_ship_from_blocks(fragment)
 		
 
-func new_ship(blocks):
-	pass
+func new_ship_from_blocks(blocks):
+	#for block in blocks:
+	pass	
 	
 
 func get_neighbors(blockpos):

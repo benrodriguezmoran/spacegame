@@ -31,7 +31,8 @@ func set_type(block_name):
 
 func get_parentship():
 	return parentship
-
+func get_colliders():
+	return colliders
 func get_subblocks():
 	if subblocks.is_empty():
 		subblocks[self.position] = self
