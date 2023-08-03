@@ -3,14 +3,13 @@ extends RigidBody3D
 var newShipScene = preload("res://scenes/ship.tscn")
 var lastSelectedBlock
 var totalMass = 0
-var blocks = {} #[Vector3 : BlockReference]
+@export var blocks = {} #[Vector3 : BlockReference]
 var selectedBlock
 var highlight
 const gridSize:int = 3
 
 func _ready():
-	if blocks.is_empty():
-		addBlock(Vector3(0,0,0), Quaternion(0,0,0,1), "structure_block")
+	
 	center_of_mass_mode = RigidBody3D.CENTER_OF_MASS_MODE_CUSTOM
 
 func _process(delta):
@@ -100,7 +99,8 @@ func update_structure():
 	var fragments = []
 	var checked = []
 	var connected:Array
-	
+#Recursive Depth First Search, get_neighbor for each neighbor until all is checked or disconituity is found, 
+#	then group separated sections 
 	var recursive = func(pos, recursive, connectionArray:Array):
 	
 		if !checked.has(pos):
@@ -111,13 +111,13 @@ func update_structure():
 			if !checked.has(neighbor):
 				recursive.call(neighbor, recursive, connectionArray)
 		return connectionArray
-	
+#Pick a random block to start DFS
 	var randblock = blocks.keys().pick_random()
 	var firstreccall = recursive.call(randblock, recursive, Array())
 	fragments.append(firstreccall)
-	if blocks.size() == checked.size():
+	if blocks.size() == checked.size():		#If all blocks are checked, no discontinuity is found
 		return
-	else:
+	else:	#Else, unchecked blocks are randomly picked until all blocks are checked, and will run for each discontinuous structure
 		var notChecked = blocks.keys()
 		while blocks.size() > checked.size():
 			for check in checked:
@@ -125,7 +125,9 @@ func update_structure():
 			var fragment = recursive.call(notChecked.pick_random(), recursive, Array())
 			fragments.append(fragment)
 		print(fragments)
-		for fragment in fragments:
+		var largestFragment = fragments.max()
+		fragments.erase(largestFragment) #Remove thew largest fragment
+		for fragment in fragments: #Send each unconnected section to make new rigidbodies 
 			new_ship_from_blocks(fragment)
 
 func new_ship_from_blocks(broken):
@@ -134,12 +136,15 @@ func new_ship_from_blocks(broken):
 	for pos in broken:
 		var block = blocks.get(pos)
 		newShipDictionary[pos] = block
-		newShipColliders = block.get_colliders()
+		newShipColliders.append_array(block.get_colliders())
 		blocks.erase(pos)
 	var newShip = newShipScene.instantiate()
+	newShip.set_script(load("res://scripts/ship_controller.gd"))
 	add_sibling(newShip)
 	for collider in newShipColliders:
 		collider.reparent(newShip)
+	for block in newShipDictionary.values():
+		block.reparent(newShip)
 	newShip.blocks = newShipDictionary
 	
 
