@@ -1,5 +1,6 @@
 extends RigidBody3D 
 
+var newShipScene = preload("res://scenes/ship.tscn")
 var lastSelectedBlock
 var totalMass = 0
 var blocks = {} #[Vector3 : BlockReference]
@@ -95,8 +96,6 @@ func update_mass():
 	mass = totalMass
 	center_of_mass = centerOfMass
 
-
-	
 func update_structure():
 	var fragments = []
 	var checked = []
@@ -120,7 +119,6 @@ func update_structure():
 		return
 	else:
 		var notChecked = blocks.keys()
-		
 		while blocks.size() > checked.size():
 			for check in checked:
 				notChecked.erase(check)
@@ -129,11 +127,20 @@ func update_structure():
 		print(fragments)
 		for fragment in fragments:
 			new_ship_from_blocks(fragment)
-		
 
-func new_ship_from_blocks(blocks):
-	#for block in blocks:
-	pass	
+func new_ship_from_blocks(broken):
+	var newShipColliders = []
+	var newShipDictionary = {}
+	for pos in broken:
+		var block = blocks.get(pos)
+		newShipDictionary[pos] = block
+		newShipColliders = block.get_colliders()
+		blocks.erase(pos)
+	var newShip = newShipScene.instantiate()
+	add_sibling(newShip)
+	for collider in newShipColliders:
+		collider.reparent(newShip)
+	newShip.blocks = newShipDictionary
 	
 
 func get_neighbors(blockpos):
