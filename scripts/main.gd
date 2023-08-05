@@ -1,9 +1,10 @@
 extends Node
-
+@onready var firstship = $"frame/Ship Controller"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	firstship.addBlock(Vector3(0,0,0), Quaternion(0,0,0,1), "structure_block")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

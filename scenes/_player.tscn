@@ -1,10 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://coa11mnhy1ph8"]
+[gd_scene load_steps=28 format=3 uid="uid://coa11mnhy1ph8"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_w4ci4"]
 [ext_resource type="Script" path="res://scripts/block_placer.gd" id="2_w0s5i"]
 [ext_resource type="Script" path="res://scripts/fps.gd" id="3_6xag1"]
 [ext_resource type="Script" path="res://scripts/player_ui.gd" id="3_x2ja2"]
 [ext_resource type="Script" path="res://scripts/jetpack_component.gd" id="5_8qltw"]
+[ext_resource type="Script" path="res://scripts/debugUI.gd" id="6_is5yq"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_epsm5"]
 radial_segments = 14
@@ -209,5 +210,11 @@ offset_left = -40.0
 offset_bottom = 23.0
 grow_horizontal = 0
 script = ExtResource("3_6xag1")
+
+[node name="Label" type="Label" parent="player_UI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("6_is5yq")
 
 [connection signal="block_selection" from="player_UI" to="block_placer" method="_on_player_ui_block_selection"]

@@ -1,12 +1,12 @@
 extends RayCast3D
 var rayCast = self
 var selectedBlock 
-var placeTarget:Node 
+@export var placeTarget:Node 
 var placeNormal:Vector3
 var placeReference:Vector3
 var lastPlaceTarget
 var lastPlaceNormal
-var targetShip
+@export var targetShip:Node
 var lastTargetShip
 var placeRotation = Quaternion()
 var lastBlock

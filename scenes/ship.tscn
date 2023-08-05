@@ -1,7 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwbf0vqnf4a0c"]
+[gd_scene load_steps=2 format=3 uid="uid://cg0tuf44471vh"]
 
-[ext_resource type="Script" path="res://scripts/ship_controller.gd" id="1_wbjqe"]
+[ext_resource type="Script" path="res://scripts/ship_controller.gd" id="1_v610q"]
 
-[node name="Ship Controller" type="RigidBody3D"]
-input_ray_pickable = false
-script = ExtResource("1_wbjqe")
+[node name="ship" type="RigidBody3D"]
+script = ExtResource("1_v610q")

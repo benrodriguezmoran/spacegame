@@ -4,17 +4,17 @@ var colliders = []
 var subblocks = {}
 var mass = 0
 var type 
-var parentship 
+var parentShip 
 
 func _init():
 	pass
 
 func _ready():
-	parentship = get_parent() if get_parent() is RigidBody3D else get_parent().get_parent()
+	parentShip = get_parent() if get_parent() is RigidBody3D else get_parent().get_parent()
 	for child in get_children():		
 		if child is CollisionShape3D && child.name != "BoundingBox":
 			colliders.append(child)
-			child.reparent.call_deferred(parentship)
+			child.reparent.call_deferred(parentShip)
 
 func _process(delta):
 	pass
@@ -27,10 +27,10 @@ func set_type(block_name):
 			child.set_script(load("res://scripts/block.gd"))
 			child.type = block_name
 			child.mass = blockManifest.blocks[block_name]["mass"]
-			child.parentship = get_parent()
+			child.parentShip = get_parent()
 
 func get_parentship():
-	return parentship
+	return parentShip
 func get_colliders():
 	return colliders
 func get_subblocks():

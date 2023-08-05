@@ -9,7 +9,7 @@ var highlight
 const gridSize:int = 3
 
 func _ready():
-	
+
 	center_of_mass_mode = RigidBody3D.CENTER_OF_MASS_MODE_CUSTOM
 
 func _process(delta):
@@ -71,6 +71,8 @@ func remove_block(target) -> void:
 	for subblock in targetSubblocks:
 		blocks.erase(blocks.find_key(subblock))
 		subblock.remove()
+	if blocks.size() == 0:
+		self.queue_free()
 	update_structure()
 	update_mass()
 
@@ -111,6 +113,8 @@ func update_structure():
 			if !checked.has(neighbor):
 				recursive.call(neighbor, recursive, connectionArray)
 		return connectionArray
+		
+		
 #Pick a random block to start DFS
 	var randblock = blocks.keys().pick_random()
 	var firstreccall = recursive.call(randblock, recursive, Array())
@@ -126,7 +130,7 @@ func update_structure():
 			fragments.append(fragment)
 		print(fragments)
 		var largestFragment = fragments.max()
-		fragments.erase(largestFragment) #Remove thew largest fragment
+		fragments.erase(largestFragment) #Remove the largest fragment
 		for fragment in fragments: #Send each unconnected section to make new rigidbodies 
 			new_ship_from_blocks(fragment)
 
@@ -145,7 +149,9 @@ func new_ship_from_blocks(broken):
 		collider.reparent(newShip)
 	for block in newShipDictionary.values():
 		block.reparent(newShip)
+		block.parentShip = newShip
 	newShip.blocks = newShipDictionary
+
 	
 
 func get_neighbors(blockpos):
