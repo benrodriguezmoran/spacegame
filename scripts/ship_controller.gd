@@ -100,7 +100,6 @@ func update_mass():
 func update_structure():
 	var fragments = []
 	var checked = []
-	var connected:Array
 #Recursive Depth First Search, get_neighbor for each neighbor until all is checked or disconituity is found, 
 #	then group separated sections 
 	var recursive = func(pos, recursive, connectionArray:Array):
@@ -113,8 +112,7 @@ func update_structure():
 			if !checked.has(neighbor):
 				recursive.call(neighbor, recursive, connectionArray)
 		return connectionArray
-		
-		
+
 #Pick a random block to start DFS
 	var randblock = blocks.keys().pick_random()
 	var firstreccall = recursive.call(randblock, recursive, Array())
@@ -134,7 +132,7 @@ func update_structure():
 		for fragment in fragments: #Send each unconnected section to make new rigidbodies 
 			new_ship_from_blocks(fragment)
 
-func new_ship_from_blocks(broken):
+func new_ship_from_blocks(broken:Array):
 	var newShipColliders = []
 	var newShipDictionary = {}
 	for pos in broken:
@@ -144,15 +142,16 @@ func new_ship_from_blocks(broken):
 		blocks.erase(pos)
 	var newShip = newShipScene.instantiate()
 	newShip.set_script(load("res://scripts/ship_controller.gd"))
-	add_sibling(newShip)
+	add_child(newShip)
+	newShip.reparent(get_parent())
 	for collider in newShipColliders:
 		collider.reparent(newShip)
 	for block in newShipDictionary.values():
 		block.reparent(newShip)
 		block.parentShip = newShip
 	newShip.blocks = newShipDictionary
-
-	
+	newShip.update_mass()
+	self.update_mass()
 
 func get_neighbors(blockpos):
 	var neighbors = []
@@ -169,7 +168,7 @@ func get_neighbors(blockpos):
 		if blocks.has(neighbor):
 			neighbors.append(neighbor)
 	return neighbors
-			
+
 func get_dictionary():
 	return blocks	
 		

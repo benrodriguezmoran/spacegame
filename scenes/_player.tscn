@@ -211,7 +211,7 @@ offset_bottom = 23.0
 grow_horizontal = 0
 script = ExtResource("3_6xag1")
 
-[node name="Label" type="Label" parent="player_UI"]
+[node name="DEBUG" type="Label" parent="player_UI"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
