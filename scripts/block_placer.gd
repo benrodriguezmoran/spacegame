@@ -35,7 +35,7 @@ func get_inputs():
 		placeRotation *= Quaternion(Vector3(0,1,0), -PI/2)
 	if Input.is_action_just_pressed("left_click") && placeTarget != null:
 		targetShip.addBlock(placeReference,placeRotation,selectedBlock)
-	if Input.is_action_just_pressed("right_click") && targetShip is RigidBody3D:
+	if Input.is_action_just_pressed("right_click") && placeTarget != null && targetShip is RigidBody3D:
 		targetShip.remove_block(placeTarget)
 
 func check_ray():	#placement raycast, calls target ship controller, will check what block is placed

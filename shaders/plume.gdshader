@@ -1,6 +1,7 @@
 shader_type spatial;
-render_mode unshaded, cull_disabled, blend_mix;
+render_mode cull_disabled, blend_mix;
 uniform bool emission;
+uniform float emissionMulti : hint_range(0.0,100.0);
 uniform float alpha : hint_range(0.0,1.0) = 0.5;
 uniform sampler2D color : source_color;
 uniform float thrust : hint_range(0.0,1.0) = 1.0;
@@ -18,7 +19,7 @@ void fragment() {
 	ALPHA = clamp((UV.y *4.0 - (noise2.r * noise1.r) + texture(noise_texture, vec2(UV.x+mod(TIME,10.0),UV.x-mod(TIME,20.0))).r * 0.5) * thrust, 0.0, 1.0) * alpha ;
 	ALBEDO = texture(color, UV.yy).rgb;
 	if (emission == true)
-		EMISSION = texture(color, UV.yy).rgb;
+		EMISSION = texture(color, UV).rgb*emissionMulti;
 }
 void vertex() {
 	VERTEX.y += (VERTEX.y+height) * (VERTEX.y+height) * clamp(acceleration + 0.5 * thrust, 0.01, 10.0);

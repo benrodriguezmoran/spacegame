@@ -8,6 +8,17 @@ var selectedBlock
 var highlight
 const gridSize:int = 3
 
+var thrusterDictionary = {}
+var tanksDictionary = {}
+var structureDictionary = {}
+
+var blockCategoriesDictionary = {
+	"thruster":thrusterDictionary,
+	"tank":tanksDictionary,
+	"structure":structureDictionary, 
+}
+
+
 func _ready():
 
 	center_of_mass_mode = RigidBody3D.CENTER_OF_MASS_MODE_CUSTOM
@@ -48,6 +59,7 @@ func addBlock(placePos:Vector3, rot:Quaternion, block_name:String):
 	newBlock.set_script(load("res://scripts/block.gd"))
 	var tempBlocks = {}
 	newBlock.set_type(block_name)
+
 	var newBlockDictionary = newBlock.get_subblocks()
 	add_child(newBlock)
 	newBlock.position = placePos * gridSize
@@ -60,6 +72,7 @@ func addBlock(placePos:Vector3, rot:Quaternion, block_name:String):
 			print("Not placed, %s" % [checkPos])
 			return
 		tempBlocks[checkPos] = newBlockDictionary[blockSize]
+	add_unique_block(placePos, newBlock)
 	blocks.merge(tempBlocks)
 	tempBlocks.clear()
 	update_mass()
@@ -68,11 +81,14 @@ func remove_block(target) -> void:
 	if target == null:
 		return
 	var targetSubblocks = target.get_subblocks().values()
+	remove_unique_block(blocks.find_key(target), target)
 	for subblock in targetSubblocks:
 		blocks.erase(blocks.find_key(subblock))
 		subblock.remove()
-	if blocks.size() == 0:
+	if blocks.size() < 1:
 		self.queue_free()
+		return
+	
 	update_structure()
 	update_mass()
 
@@ -100,8 +116,8 @@ func update_mass():
 func update_structure():
 	var fragments = []
 	var checked = []
-#Recursive Depth First Search, get_neighbor for each neighbor until all is checked or disconituity is found, 
-#	then group separated sections 
+	#Recursive Depth First Search, get_neighbor for each neighbor until all is checked or disconituity is found, 
+	#then group separated sections 
 	var recursive = func(pos, recursive, connectionArray:Array):
 	
 		if !checked.has(pos):
@@ -113,13 +129,15 @@ func update_structure():
 				recursive.call(neighbor, recursive, connectionArray)
 		return connectionArray
 
-#Pick a random block to start DFS
+	#Pick a random block to start DFS
 	var randblock = blocks.keys().pick_random()
 	var firstreccall = recursive.call(randblock, recursive, Array())
 	fragments.append(firstreccall)
-	if blocks.size() == checked.size():		#If all blocks are checked, no discontinuity is found
+	#If all blocks are checked, no discontinuity is found
+	if blocks.size() == checked.size():
 		return
-	else:	#Else, unchecked blocks are randomly picked until all blocks are checked, and will run for each discontinuous structure
+	#Else, unchecked blocks are randomly picked until all blocks are checked, and will run for each discontinuous structure
+	else:	
 		var notChecked = blocks.keys()
 		while blocks.size() > checked.size():
 			for check in checked:
@@ -139,6 +157,7 @@ func new_ship_from_blocks(broken:Array):
 		var block = blocks.get(pos)
 		newShipDictionary[pos] = block
 		newShipColliders.append_array(block.get_colliders())
+		remove_unique_block(pos, blocks.get(pos))
 		blocks.erase(pos)
 	var newShip = newShipScene.instantiate()
 	newShip.set_script(load("res://scripts/ship_controller.gd"))
@@ -149,9 +168,11 @@ func new_ship_from_blocks(broken:Array):
 	for block in newShipDictionary.values():
 		block.reparent(newShip)
 		block.parentShip = newShip
+		newShip.add_unique_block(newShipDictionary.find_key(block), block)
 	newShip.blocks = newShipDictionary
 	newShip.update_mass()
 	self.update_mass()
+
 
 func get_neighbors(blockpos):
 	var neighbors = []
@@ -171,4 +192,12 @@ func get_neighbors(blockpos):
 
 func get_dictionary():
 	return blocks	
-		
+
+func add_unique_block(pos, block_ref):
+	if block_ref.category in blockManifest.block_categories :
+		blockCategoriesDictionary[block_ref.category][pos] = block_ref
+
+func remove_unique_block(pos, block_ref):
+	if block_ref.category in blockManifest.block_categories :
+		blockCategoriesDictionary[block_ref.category].erase(pos)
+

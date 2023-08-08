@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dnifisvkk8i3a"]
+[gd_scene load_steps=33 format=3 uid="uid://dnifisvkk8i3a"]
 
 [ext_resource type="PackedScene" uid="uid://cbcjptpuaxcet" path="res://scenes/meshscenes/drive_3x3.tscn" id="1_eb28h"]
 [ext_resource type="Shader" path="res://shaders/plume.gdshader" id="2_ieb1t"]
@@ -47,10 +47,14 @@ turbulence_influence_over_life = SubResource("CurveTexture_fcqrv")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b0062"]
 transparency = 1
-shading_mode = 0
+shading_mode = 2
+disable_ambient_light = true
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
-albedo_color = Color(1, 1, 1, 0.12549)
+albedo_color = Color(0.611765, 0, 0.317647, 1)
+emission_enabled = true
+emission = Color(0.517647, 0.188235, 0.901961, 1)
+emission_energy_multiplier = 100.0
 use_particle_trails = true
 
 [sub_resource type="TubeTrailMesh" id="TubeTrailMesh_l3y2r"]
@@ -62,38 +66,9 @@ section_length = 7.851
 cap_top = false
 cap_bottom = false
 
-[sub_resource type="Shader" id="Shader_x0wyp"]
-code = "shader_type spatial;
-render_mode unshaded, cull_disabled, blend_mix;
-uniform bool emission;
-uniform float alpha : hint_range(0.0,1.0) = 0.5;
-uniform sampler2D color : source_color;
-uniform float thrust : hint_range(0.0,1.0) = 1.0;
-uniform float acceleration : hint_range(0.0, 10.0) = 0.00;
-uniform float speed : hint_range(0.0, 10.0) = 5.0;
-uniform float speed2 : hint_range(0.0, 10.0) = 5.0;
-uniform float height = 1.0;
-uniform sampler2D noise_texture;
-uniform sampler2D noise_texture2;
-
-void fragment() {
-	vec4 noise1 = texture(noise_texture, vec2(pow(UV.y,2), 0.0) + TIME * speed);
-	vec4 noise2 = texture(noise_texture, vec2(UV.y,UV.y) + TIME * speed2);
-	ALPHA = clamp((UV.y *4.0 - (noise2.r * noise1.r) + texture(noise_texture, vec2(UV.x+mod(TIME,10.0),UV.x-mod(TIME,20.0))).r * 0.5) * thrust, 0.0, 1.0) * alpha ;
-	ALBEDO = texture(color, UV.yy).rgb;
-	if (emission == true)
-		EMISSION = texture(color, UV.yy).rgb;
-}
-void vertex() {
-	VERTEX.y += (VERTEX.y+height) * (VERTEX.y+height) * clamp(acceleration + 0.5 * thrust, 0.01, 10.0);
-	if (VERTEX.y > height){
-		VERTEX.y += texture(noise_texture2, UV + TIME * speed).r * clamp(acceleration, 1.0, 10.0);
-	}
-}"
-
 [sub_resource type="Gradient" id="Gradient_8mypd"]
 offsets = PackedFloat32Array(0, 0.989547)
-colors = PackedColorArray(0.901193, 0.493043, 0.434253, 1, 1, 0.832212, 0.818434, 1)
+colors = PackedColorArray(0.93339, 0.420864, 0.665299, 1, 1, 0.832212, 0.818434, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_pt540"]
 gradient = SubResource("Gradient_8mypd")
@@ -110,22 +85,25 @@ seamless_blend_skirt = 0.304
 noise = SubResource("FastNoiseLite_4cehl")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vawvo"]
-noise_type = 0
-frequency = 0.053
+noise_type = 3
+frequency = 0.0343
+domain_warp_enabled = true
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o6r5n"]
 noise = SubResource("FastNoiseLite_vawvo")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i0g7p"]
 render_priority = 0
-shader = SubResource("Shader_x0wyp")
+shader = ExtResource("2_ieb1t")
 shader_parameter/emission = true
+shader_parameter/emissionMulti = 13.913
 shader_parameter/alpha = 0.376
-shader_parameter/thrust = 1.0
+shader_parameter/thrust = 0.315
 shader_parameter/acceleration = 0.0
 shader_parameter/speed = 3.714
-shader_parameter/speed2 = 4.959
+shader_parameter/speed2 = 5.916
 shader_parameter/height = 1.0
+shader_parameter/tail_mult = 1.0
 shader_parameter/color = SubResource("GradientTexture2D_pt540")
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_hxxq7")
 shader_parameter/noise_texture2 = SubResource("NoiseTexture2D_o6r5n")
@@ -134,6 +112,57 @@ shader_parameter/noise_texture2 = SubResource("NoiseTexture2D_o6r5n")
 material = SubResource("ShaderMaterial_i0g7p")
 top_radius = 11.602
 bottom_radius = 5.017
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="Gradient" id="Gradient_e631p"]
+offsets = PackedFloat32Array(0, 0.989547)
+colors = PackedColorArray(0.93339, 0.420864, 0.665299, 1, 1, 0.832212, 0.818434, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nw4jb"]
+gradient = SubResource("Gradient_e631p")
+fill_from = Vector2(0.521368, 0)
+fill_to = Vector2(0.529915, 0.380342)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5bqkr"]
+offset = Vector3(0.34, 0, 0)
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2nfs6"]
+seamless = true
+seamless_blend_skirt = 0.304
+noise = SubResource("FastNoiseLite_5bqkr")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fak7t"]
+noise_type = 3
+frequency = 0.0343
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6gjpg"]
+noise = SubResource("FastNoiseLite_fak7t")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qvn7t"]
+render_priority = 0
+shader = ExtResource("2_ieb1t")
+shader_parameter/emission = true
+shader_parameter/emissionMulti = 22.609
+shader_parameter/alpha = 0.376
+shader_parameter/thrust = 0.315
+shader_parameter/acceleration = 0.0
+shader_parameter/speed = 3.714
+shader_parameter/speed2 = 5.916
+shader_parameter/height = 10.0
+shader_parameter/tail_mult = 20.0
+shader_parameter/color = SubResource("GradientTexture2D_nw4jb")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_2nfs6")
+shader_parameter/noise_texture2 = SubResource("NoiseTexture2D_6gjpg")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dvoqq"]
+material = SubResource("ShaderMaterial_qvn7t")
+custom_aabb = AABB(0, 0, 0, 10, 20, 10)
+top_radius = 11.602
+bottom_radius = 3.417
+height = 3.6
 cap_top = false
 cap_bottom = false
 
@@ -146,6 +175,7 @@ fill_to = Vector2(0.529915, 0.380342)
 render_priority = 0
 shader = ExtResource("2_ieb1t")
 shader_parameter/emission = true
+shader_parameter/emissionMulti = 16.35
 shader_parameter/alpha = 0.83
 shader_parameter/thrust = 1.0
 shader_parameter/acceleration = 0.0
@@ -170,13 +200,14 @@ cap_bottom = false
 render_priority = 0
 shader = ExtResource("2_ieb1t")
 shader_parameter/emission = true
+shader_parameter/emissionMulti = null
 shader_parameter/alpha = 0.151
 shader_parameter/thrust = 1.0
 shader_parameter/acceleration = 0.0
 shader_parameter/speed = 3.714
 shader_parameter/speed2 = 4.959
 shader_parameter/height = 3.0
-shader_parameter/tail_mult = 6.0
+shader_parameter/tail_mult = 12.0
 shader_parameter/color = SubResource("GradientTexture2D_pt540")
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_hxxq7")
 shader_parameter/noise_texture2 = SubResource("NoiseTexture2D_o6r5n")
@@ -381,8 +412,13 @@ process_material = SubResource("ParticleProcessMaterial_gwvho")
 draw_pass_1 = SubResource("TubeTrailMesh_l3y2r")
 
 [node name="plume" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -3, -11.3094, -3)
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -3, -11.2678, -3)
 mesh = SubResource("CylinderMesh_vyas4")
+skeleton = NodePath("../..")
+
+[node name="plume4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -3, -0.165513, -3)
+mesh = SubResource("CylinderMesh_dvoqq")
 skeleton = NodePath("../..")
 
 [node name="plume2" type="MeshInstance3D" parent="."]

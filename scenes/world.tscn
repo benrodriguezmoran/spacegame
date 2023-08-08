@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/UI_controller.gd" id="2_pbsoq"]
 [ext_resource type="Environment" uid="uid://dckas8pn11ksi" path="res://environment.tres" id="3_d7swh"]
 [ext_resource type="PackedScene" uid="uid://coa11mnhy1ph8" path="res://scenes/_player.tscn" id="3_vrwyv"]
-[ext_resource type="PackedScene" uid="uid://cg0tuf44471vh" path="res://scenes/ship.tscn" id="8_aicjf"]
+[ext_resource type="PackedScene" uid="uid://clgkc04o6f6ca" path="res://scenes/ship.tscn" id="8_aicjf"]
 
 [sub_resource type="World3D" id="World3D_qwyru"]
 environment = ExtResource("3_d7swh")

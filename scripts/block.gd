@@ -4,6 +4,7 @@ var colliders = []
 var subblocks = {}
 var mass = 0
 var type 
+var category
 var parentShip 
 
 func _init():
@@ -22,12 +23,14 @@ func _process(delta):
 func set_type(block_name):
 	type = block_name
 	mass = blockManifest.blocks[block_name]["mass"]
+	category = blockManifest.blocks[block_name]["category"]
 	for child in get_children():	
 		if child is Area3D:
 			child.set_script(load("res://scripts/block.gd"))
 			child.type = block_name
 			child.mass = blockManifest.blocks[block_name]["mass"]
 			child.parentShip = get_parent()
+			child.category = blockManifest.blocks[block_name]["category"]
 
 func get_parentship():
 	return parentShip

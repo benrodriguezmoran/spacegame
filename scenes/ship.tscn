@@ -1,11 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cg0tuf44471vh"]
+[gd_scene load_steps=2 format=3 uid="uid://c2nbcyuvxfc26"]
 
-[ext_resource type="Script" path="res://scripts/ship_controller.gd" id="1_v610q"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_j1n1o"]
+[ext_resource type="Script" path="res://scripts/ship_controller.gd" id="1_il155"]
 
 [node name="ship" type="RigidBody3D"]
-script = ExtResource("1_v610q")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_j1n1o")
+script = ExtResource("1_il155")
