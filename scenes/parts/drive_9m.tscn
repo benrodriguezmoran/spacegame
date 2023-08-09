@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dnifisvkk8i3a"]
+[gd_scene load_steps=38 format=3 uid="uid://dnifisvkk8i3a"]
 
 [ext_resource type="PackedScene" uid="uid://cbcjptpuaxcet" path="res://scenes/meshscenes/drive_3x3.tscn" id="1_eb28h"]
 [ext_resource type="Shader" path="res://shaders/plume.gdshader" id="2_ieb1t"]
@@ -31,10 +31,10 @@ emission_ring_radius = 3.0
 emission_ring_inner_radius = 0.0
 particle_flag_align_y = true
 direction = Vector3(0, -1, 0)
-spread = 0.0
+spread = 1.12
 gravity = Vector3(0, 0, 0)
-initial_velocity_min = 94.66
-initial_velocity_max = 179.25
+initial_velocity_min = 5000.0
+initial_velocity_max = 10000.0
 scale_min = 0.25
 color_ramp = SubResource("GradientTexture1D_2nch4")
 hue_variation_min = 0.02
@@ -47,6 +47,7 @@ turbulence_influence_over_life = SubResource("CurveTexture_fcqrv")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b0062"]
 transparency = 1
+blend_mode = 3
 shading_mode = 2
 disable_ambient_light = true
 vertex_color_use_as_albedo = true
@@ -65,6 +66,38 @@ sections = 2
 section_length = 7.851
 cap_top = false
 cap_bottom = false
+
+[sub_resource type="Gradient" id="Gradient_nwkk5"]
+offsets = PackedFloat32Array(0.0382166, 0.273885, 0.477707, 0.592357, 0.936306)
+colors = PackedColorArray(0.997504, 0.859841, 1, 1, 0.988235, 1, 0.980392, 1, 1, 1, 1, 1, 1, 0.556863, 0.443137, 1, 0.422781, 0.0959187, 0.122744, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_egila"]
+gradient = SubResource("Gradient_nwkk5")
+
+[sub_resource type="Curve" id="Curve_8gyhj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_1auoo"]
+curve = SubResource("Curve_8gyhj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gok25"]
+emission_shape = 1
+emission_sphere_radius = 59.04
+particle_flag_align_y = true
+direction = Vector3(0, -1, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 273.29
+scale_min = 0.25
+color_ramp = SubResource("GradientTexture1D_egila")
+hue_variation_min = 0.02
+hue_variation_max = 0.05
+turbulence_noise_strength = 0.0
+turbulence_noise_scale = 0.0
+turbulence_influence_min = 0.04
+turbulence_influence_max = 0.04
+turbulence_influence_over_life = SubResource("CurveTexture_1auoo")
 
 [sub_resource type="Gradient" id="Gradient_8mypd"]
 offsets = PackedFloat32Array(0, 0.989547)
@@ -115,6 +148,30 @@ bottom_radius = 5.017
 cap_top = false
 cap_bottom = false
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w05ko"]
+render_priority = 0
+shader = ExtResource("2_ieb1t")
+shader_parameter/emission = true
+shader_parameter/emissionMulti = null
+shader_parameter/alpha = 0.151
+shader_parameter/thrust = 1.0
+shader_parameter/acceleration = 0.0
+shader_parameter/speed = 3.714
+shader_parameter/speed2 = 4.959
+shader_parameter/height = 3.0
+shader_parameter/tail_mult = 12.0
+shader_parameter/color = SubResource("GradientTexture2D_pt540")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_hxxq7")
+shader_parameter/noise_texture2 = SubResource("NoiseTexture2D_o6r5n")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_n4o5r"]
+material = SubResource("ShaderMaterial_w05ko")
+top_radius = 11.602
+bottom_radius = 5.017
+height = 6.0
+cap_top = false
+cap_bottom = false
+
 [sub_resource type="Gradient" id="Gradient_e631p"]
 offsets = PackedFloat32Array(0, 0.989547)
 colors = PackedColorArray(0.93339, 0.420864, 0.665299, 1, 1, 0.832212, 0.818434, 1)
@@ -145,14 +202,14 @@ noise = SubResource("FastNoiseLite_fak7t")
 render_priority = 0
 shader = ExtResource("2_ieb1t")
 shader_parameter/emission = true
-shader_parameter/emissionMulti = 22.609
+shader_parameter/emissionMulti = 21.382
 shader_parameter/alpha = 0.376
-shader_parameter/thrust = 0.315
+shader_parameter/thrust = 1.0
 shader_parameter/acceleration = 0.0
 shader_parameter/speed = 3.714
-shader_parameter/speed2 = 5.916
-shader_parameter/height = 10.0
-shader_parameter/tail_mult = 20.0
+shader_parameter/speed2 = 7.082
+shader_parameter/height = 0.1
+shader_parameter/tail_mult = 10.0
 shader_parameter/color = SubResource("GradientTexture2D_nw4jb")
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_2nfs6")
 shader_parameter/noise_texture2 = SubResource("NoiseTexture2D_6gjpg")
@@ -160,9 +217,9 @@ shader_parameter/noise_texture2 = SubResource("NoiseTexture2D_6gjpg")
 [sub_resource type="CylinderMesh" id="CylinderMesh_dvoqq"]
 material = SubResource("ShaderMaterial_qvn7t")
 custom_aabb = AABB(0, 0, 0, 10, 20, 10)
-top_radius = 11.602
-bottom_radius = 3.417
-height = 3.6
+top_radius = 13.914
+bottom_radius = 0.0
+height = 6.458
 cap_top = false
 cap_bottom = false
 
@@ -193,30 +250,6 @@ custom_aabb = AABB(0, 5, 0, 0, 40, 0)
 top_radius = 3.315
 bottom_radius = 5.3
 height = 10.0
-cap_top = false
-cap_bottom = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_w05ko"]
-render_priority = 0
-shader = ExtResource("2_ieb1t")
-shader_parameter/emission = true
-shader_parameter/emissionMulti = null
-shader_parameter/alpha = 0.151
-shader_parameter/thrust = 1.0
-shader_parameter/acceleration = 0.0
-shader_parameter/speed = 3.714
-shader_parameter/speed2 = 4.959
-shader_parameter/height = 3.0
-shader_parameter/tail_mult = 12.0
-shader_parameter/color = SubResource("GradientTexture2D_pt540")
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_hxxq7")
-shader_parameter/noise_texture2 = SubResource("NoiseTexture2D_o6r5n")
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_n4o5r"]
-material = SubResource("ShaderMaterial_w05ko")
-top_radius = 11.602
-bottom_radius = 5.017
-height = 6.0
 cap_top = false
 cap_bottom = false
 
@@ -389,7 +422,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -3, -3)
 shape = SubResource("BoxShape3D_gggi4")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -130.529, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -171.729, -3)
 light_energy = 1000.0
 light_indirect_energy = 16.0
 light_volumetric_fog_energy = 0.0
@@ -397,13 +430,15 @@ light_size = 0.171
 omni_range = 130.416
 
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -9.59902, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -13.0509, -3)
 cast_shadow = 0
 amount = 500
-lifetime = 0.49
+lifetime = 1.46
 speed_scale = 1.28
 randomness = 1.0
 fixed_fps = 120
+interpolate = false
+fract_delta = false
 collision_base_size = 0.0
 visibility_aabb = AABB(-4, -1185.03, -4, 8, 1241.15, 8)
 trail_enabled = true
@@ -411,13 +446,35 @@ trail_lifetime = 0.33
 process_material = SubResource("ParticleProcessMaterial_gwvho")
 draw_pass_1 = SubResource("TubeTrailMesh_l3y2r")
 
+[node name="GPUParticles3D3" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -148.528, -3)
+cast_shadow = 0
+amount = 500
+lifetime = 0.04
+speed_scale = 2.4
+randomness = 1.0
+fixed_fps = 120
+interpolate = false
+fract_delta = false
+collision_base_size = 0.0
+visibility_aabb = AABB(-4, -1185.03, -4, 8, 1241.15, 8)
+trail_enabled = true
+trail_lifetime = 0.33
+process_material = SubResource("ParticleProcessMaterial_gok25")
+draw_pass_1 = SubResource("TubeTrailMesh_l3y2r")
+
 [node name="plume" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -3, -11.2678, -3)
 mesh = SubResource("CylinderMesh_vyas4")
 skeleton = NodePath("../..")
 
+[node name="plume3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -3, -12.9495, -3)
+mesh = SubResource("CylinderMesh_n4o5r")
+skeleton = NodePath("../..")
+
 [node name="plume4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -3, -0.165513, -3)
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -3, -26.2876, -3)
 mesh = SubResource("CylinderMesh_dvoqq")
 skeleton = NodePath("../..")
 
@@ -426,26 +483,22 @@ transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -3, -1
 mesh = SubResource("CylinderMesh_5c8k7")
 skeleton = NodePath("../..")
 
-[node name="plume3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -3, -12.9495, -3)
-mesh = SubResource("CylinderMesh_n4o5r")
-skeleton = NodePath("../..")
-
 [node name="GPUParticlesAttractorSphere3D3" type="GPUParticlesAttractorSphere3D" parent="."]
-transform = Transform3D(-1, -3.82137e-15, -8.74228e-08, -8.74228e-08, 4.37114e-08, 1, 0, 1, -4.37114e-08, -3, -130.63, -3)
-strength = 20000.0
-attenuation = 0.0136024
-directionality = 0.24
-radius = 20.24
+transform = Transform3D(-1, -3.82137e-15, -8.74228e-08, 8.74228e-08, 4.37114e-08, -1, 7.64274e-15, -1, -4.37114e-08, -3, -114.455, -3)
+strength = 40000.0
+attenuation = 1e-05
+radius = 105.421
 
 [node name="GPUParticlesAttractorBox3D" type="GPUParticlesAttractorBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -3, -57.3515, -3)
+visible = false
 strength = 10000.0
 directionality = 1.0
 size = Vector3(10, 10, 92.8876)
 
 [node name="GPUParticlesAttractorBox3D2" type="GPUParticlesAttractorBox3D" parent="."]
 transform = Transform3D(-1, 1.14641e-14, 8.74228e-08, 8.74228e-08, 4.37114e-08, 1, 7.64274e-15, 1, -4.37114e-08, -3, -160.905, -3)
+visible = false
 strength = 600000.0
 directionality = 1.0
 size = Vector3(10, 10, 54.75)

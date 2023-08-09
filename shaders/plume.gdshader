@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode cull_disabled, blend_mix;
+render_mode unshaded, cull_disabled, blend_mix;
 uniform bool emission;
 uniform float emissionMulti : hint_range(0.0,100.0);
 uniform float alpha : hint_range(0.0,1.0) = 0.5;

@@ -5,7 +5,7 @@ var roll_sensitivity = 300
 var thrust_multiplier = 1500
 var jetpack:bool = true
 var mouse_delta: Vector2
-@onready var playerBody = get_parent()
+@onready var playerBody = $"../.."
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

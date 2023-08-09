@@ -4,3 +4,5 @@
 
 [node name="ship" type="RigidBody3D"]
 script = ExtResource("1_laxmr")
+
+[node name="ship_input_handler" type="Node" parent="."]

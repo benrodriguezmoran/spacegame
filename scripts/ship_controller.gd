@@ -1,6 +1,6 @@
 extends RigidBody3D 
 
-var newShipScene = preload("res://scenes/ship.tscn")
+@onready var newShipScene = preload("res://scenes/ship.tscn")
 var lastSelectedBlock
 var totalMass = 0
 @export var blocks = {} #[Vector3 : BlockReference]

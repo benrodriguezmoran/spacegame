@@ -1,4 +1,7 @@
-extends Node
+extends Node3D
+@export var colliders = []
+@export var walls = []
+enum DIRECTION {FORE,BACK,LEFT,RIGHT,UP,DOWN}
 
 
 # Called when the node enters the scene tree for the first time.

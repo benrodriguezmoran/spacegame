@@ -1,9 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://coa11mnhy1ph8"]
+[gd_scene load_steps=29 format=3 uid="uid://coa11mnhy1ph8"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_w4ci4"]
 [ext_resource type="Script" path="res://scripts/block_placer.gd" id="2_w0s5i"]
 [ext_resource type="Script" path="res://scripts/fps.gd" id="3_6xag1"]
 [ext_resource type="Script" path="res://scripts/player_ui.gd" id="3_x2ja2"]
+[ext_resource type="Script" path="res://scripts/walk_component.gd" id="4_iw75s"]
 [ext_resource type="Script" path="res://scripts/jetpack_component.gd" id="5_8qltw"]
 [ext_resource type="Script" path="res://scripts/debugUI.gd" id="6_is5yq"]
 
@@ -106,8 +107,13 @@ collide_with_areas = true
 collide_with_bodies = false
 script = ExtResource("2_w0s5i")
 
-[node name="jetpack_component" type="Node" parent="."]
+[node name="movement_controller" type="Node" parent="."]
+
+[node name="jetpack_component" type="Node" parent="movement_controller"]
 script = ExtResource("5_8qltw")
+
+[node name="walk_component" type="Node" parent="movement_controller"]
+script = ExtResource("4_iw75s")
 
 [node name="player_UI" type="Control" parent="."]
 layout_mode = 3
