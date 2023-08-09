@@ -2,7 +2,7 @@ extends Node
 
 @onready var hotbar = $hotbar
 signal block_selection(block_name)
-var hotbarSelection =  ["structure_block", "thruster", "thruster_5", "drive_9m" ]
+var hotbarSelection =  ["structure_block", "thruster", "thruster_5", "drive_9m", "passage" ]
 #var dVconsumed = 0
 #var acceleration = 0
 #var last_vel = 0

@@ -1,6 +1,6 @@
 extends RigidBody3D 
 
-@onready var newShipScene = preload("res://scenes/ship.tscn")
+@onready var newShipScene = load("res://scenes/ship.tscn")
 var lastSelectedBlock
 var totalMass = 0
 @export var blocks = {} #[Vector3 : BlockReference]
@@ -50,7 +50,6 @@ func preselect(target, normal:Vector3, rot:Quaternion, block_name:String):
 			add_child(highlight)
 	elif has_node("highlight"):
 		$highlight.queue_free()
-		
 	lastSelectedBlock = block_name
 	return ref
 
@@ -61,7 +60,7 @@ func addBlock(placePos:Vector3, rot:Quaternion, block_name:String):
 	var newBlock = newBlockRef.scene.instantiate()
 	newBlock.set_script(load("res://scripts/block.gd"))
 	var tempBlocks = {}
-	newBlock.set_type(block_name)
+	newBlock.set_type(block_name, self)
 
 	var newBlockDictionary = newBlock.get_subblocks()
 	add_child(newBlock)
@@ -122,7 +121,7 @@ func update_structure():
 	#Recursive Depth First Search, get_neighbor for each neighbor until all is checked or disconituity is found, 
 	#then group separated sections 
 	var recursive = func(pos, recursive, connectionArray:Array):
-	
+	#Position, external scope passed self reference, array to add poistions to
 		if !checked.has(pos):
 			checked.append(pos)
 			connectionArray.append(pos)

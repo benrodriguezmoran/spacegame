@@ -33,10 +33,10 @@ extends Node
 		"category":"thruster",
 		},
 	"passage": {
-		"scene":preload("res://scenes/parts/thruster_5.tscn"),
-		"mesh":preload("res://scenes/meshscenes/thruster5.tscn"),
+		"scene":preload("res://scenes/parts/passage.tscn"),
+		"mesh":preload("res://scenes/meshscenes/passage.tscn"),
 		"size":Vector3(1,1,1),
-		"mass":100,
+		"mass":200,
 		"category":"passage",
 		}
 	}

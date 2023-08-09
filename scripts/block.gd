@@ -12,19 +12,22 @@ func _init():
 
 func _ready():
 	parentShip = get_parent() if get_parent() is RigidBody3D else get_parent().get_parent()
-	for child in get_children():		
-		if child is CollisionShape3D && child.name != "BoundingBox":
-			colliders.append(child)
-			child.reparent.call_deferred(parentShip)
+	
 
 func _process(delta):
 	pass
 	
-func set_type(block_name):
+func set_type(block_name, parent:Node):
+	parentShip = parent
 	type = block_name
 	mass = blockManifest.blocks[block_name]["mass"]
 	category = blockManifest.blocks[block_name]["category"]
-	for child in get_children():	
+		
+		
+	for child in get_children():
+		if child is CollisionShape3D && child.name != "BoundingBox":
+			colliders.append(child)
+			child.reparent.call_deferred(parentShip)	
 		if child is Area3D:
 			child.set_script(load("res://scripts/block.gd"))
 			child.type = block_name

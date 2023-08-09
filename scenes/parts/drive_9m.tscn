@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dnifisvkk8i3a"]
+[gd_scene load_steps=45 format=3 uid="uid://dnifisvkk8i3a"]
 
 [ext_resource type="PackedScene" uid="uid://cbcjptpuaxcet" path="res://scenes/meshscenes/drive_3x3.tscn" id="1_eb28h"]
 [ext_resource type="Shader" path="res://shaders/plume.gdshader" id="2_ieb1t"]
@@ -31,10 +31,10 @@ emission_ring_radius = 3.0
 emission_ring_inner_radius = 0.0
 particle_flag_align_y = true
 direction = Vector3(0, -1, 0)
-spread = 1.12
+spread = 4.47
 gravity = Vector3(0, 0, 0)
-initial_velocity_min = 5000.0
-initial_velocity_max = 10000.0
+initial_velocity_min = 1000.0
+initial_velocity_max = 5000.0
 scale_min = 0.25
 color_ramp = SubResource("GradientTexture1D_2nch4")
 hue_variation_min = 0.02
@@ -52,9 +52,9 @@ shading_mode = 2
 disable_ambient_light = true
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
-albedo_color = Color(0.611765, 0, 0.317647, 1)
+albedo_color = Color(1, 0.509804, 0.678431, 1)
 emission_enabled = true
-emission = Color(0.517647, 0.188235, 0.901961, 1)
+emission = Color(0.984314, 0.172549, 0.360784, 1)
 emission_energy_multiplier = 100.0
 use_particle_trails = true
 
@@ -83,12 +83,11 @@ curve = SubResource("Curve_8gyhj")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gok25"]
 emission_shape = 1
-emission_sphere_radius = 59.04
+emission_sphere_radius = 128.0
 particle_flag_align_y = true
-direction = Vector3(0, -1, 0)
+direction = Vector3(0, 1, 0)
 spread = 180.0
 gravity = Vector3(0, 0, 0)
-initial_velocity_max = 273.29
 scale_min = 0.25
 color_ramp = SubResource("GradientTexture1D_egila")
 hue_variation_min = 0.02
@@ -98,6 +97,62 @@ turbulence_noise_scale = 0.0
 turbulence_influence_min = 0.04
 turbulence_influence_max = 0.04
 turbulence_influence_over_life = SubResource("CurveTexture_1auoo")
+
+[sub_resource type="Gradient" id="Gradient_bm5uw"]
+offsets = PackedFloat32Array(0.0382166, 0.273885, 0.477707, 0.592357, 0.936306)
+colors = PackedColorArray(0.997504, 0.859841, 1, 1, 0.988235, 1, 0.980392, 1, 1, 1, 1, 1, 1, 0.556863, 0.443137, 1, 0.422781, 0.0959187, 0.122744, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_oqqjg"]
+gradient = SubResource("Gradient_bm5uw")
+
+[sub_resource type="Curve" id="Curve_tav0x"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_g032a"]
+curve = SubResource("Curve_tav0x")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yt27y"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 1.0
+emission_ring_radius = 20.0
+emission_ring_inner_radius = 18.0
+particle_flag_align_y = true
+direction = Vector3(0, 1, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.25
+color_ramp = SubResource("GradientTexture1D_oqqjg")
+hue_variation_min = 0.02
+hue_variation_max = 0.05
+turbulence_noise_strength = 0.0
+turbulence_noise_scale = 0.0
+turbulence_influence_min = 0.04
+turbulence_influence_max = 0.04
+turbulence_influence_over_life = SubResource("CurveTexture_g032a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_giq5h"]
+transparency = 1
+blend_mode = 3
+shading_mode = 2
+disable_ambient_light = true
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(1, 0.509804, 0.678431, 1)
+emission_enabled = true
+emission = Color(0.984314, 0.172549, 0.360784, 1)
+emission_energy_multiplier = 100.0
+use_particle_trails = true
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_vvkbp"]
+material = SubResource("StandardMaterial3D_giq5h")
+radius = 0.4
+radial_steps = 3
+sections = 2
+section_length = 7.851
+cap_top = false
+cap_bottom = false
 
 [sub_resource type="Gradient" id="Gradient_8mypd"]
 offsets = PackedFloat32Array(0, 0.989547)
@@ -423,7 +478,7 @@ shape = SubResource("BoxShape3D_gggi4")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -171.729, -3)
-light_energy = 1000.0
+light_energy = 10000.0
 light_indirect_energy = 16.0
 light_volumetric_fog_energy = 0.0
 light_size = 0.171
@@ -433,7 +488,7 @@ omni_range = 130.416
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -13.0509, -3)
 cast_shadow = 0
 amount = 500
-lifetime = 1.46
+lifetime = 0.51
 speed_scale = 1.28
 randomness = 1.0
 fixed_fps = 120
@@ -447,21 +502,36 @@ process_material = SubResource("ParticleProcessMaterial_gwvho")
 draw_pass_1 = SubResource("TubeTrailMesh_l3y2r")
 
 [node name="GPUParticles3D3" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -148.528, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -200, -3)
 cast_shadow = 0
 amount = 500
 lifetime = 0.04
 speed_scale = 2.4
-randomness = 1.0
 fixed_fps = 120
 interpolate = false
 fract_delta = false
 collision_base_size = 0.0
 visibility_aabb = AABB(-4, -1185.03, -4, 8, 1241.15, 8)
 trail_enabled = true
-trail_lifetime = 0.33
+trail_lifetime = 0.15
 process_material = SubResource("ParticleProcessMaterial_gok25")
 draw_pass_1 = SubResource("TubeTrailMesh_l3y2r")
+
+[node name="GPUParticles3D4" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -200, -3)
+cast_shadow = 0
+amount = 100
+lifetime = 0.04
+speed_scale = 2.4
+fixed_fps = 120
+interpolate = false
+fract_delta = false
+collision_base_size = 0.0
+visibility_aabb = AABB(-4, -1185.03, -4, 8, 1241.15, 8)
+trail_enabled = true
+trail_lifetime = 0.03
+process_material = SubResource("ParticleProcessMaterial_yt27y")
+draw_pass_1 = SubResource("TubeTrailMesh_vvkbp")
 
 [node name="plume" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -3, -11.2678, -3)
@@ -484,21 +554,14 @@ mesh = SubResource("CylinderMesh_5c8k7")
 skeleton = NodePath("../..")
 
 [node name="GPUParticlesAttractorSphere3D3" type="GPUParticlesAttractorSphere3D" parent="."]
-transform = Transform3D(-1, -3.82137e-15, -8.74228e-08, 8.74228e-08, 4.37114e-08, -1, 7.64274e-15, -1, -4.37114e-08, -3, -114.455, -3)
-strength = 40000.0
+transform = Transform3D(1, 7.64274e-15, 2.13163e-14, -2.13163e-14, -4.37114e-08, 1, 7.64274e-15, -1, -4.37114e-08, -3, -200, -3)
+strength = 60000.0
 attenuation = 1e-05
-radius = 105.421
-
-[node name="GPUParticlesAttractorBox3D" type="GPUParticlesAttractorBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -3, -57.3515, -3)
-visible = false
-strength = 10000.0
-directionality = 1.0
-size = Vector3(10, 10, 92.8876)
+radius = 148.454
 
 [node name="GPUParticlesAttractorBox3D2" type="GPUParticlesAttractorBox3D" parent="."]
-transform = Transform3D(-1, 1.14641e-14, 8.74228e-08, 8.74228e-08, 4.37114e-08, 1, 7.64274e-15, 1, -4.37114e-08, -3, -160.905, -3)
-visible = false
-strength = 600000.0
+transform = Transform3D(-1, 1.14641e-14, 8.74228e-08, 8.74228e-08, 4.37114e-08, 1, 7.64274e-15, 1, -4.37114e-08, -3, -210.153, -3)
+strength = 6e+06
+attenuation = 1.23114
 directionality = 1.0
-size = Vector3(10, 10, 54.75)
+size = Vector3(25, 25, 50)
