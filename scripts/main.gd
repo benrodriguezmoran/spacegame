@@ -1,5 +1,5 @@
 extends Node
-@onready var firstship = $"frame/Ship Controller"
+@onready var firstship = $"frame/ship"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

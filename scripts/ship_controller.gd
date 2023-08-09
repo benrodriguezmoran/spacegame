@@ -11,20 +11,23 @@ const gridSize:int = 3
 var thrusterDictionary = {}
 var tanksDictionary = {}
 var structureDictionary = {}
-
+var passageDictionary = {}
+var driveDictionary = {}
 var blockCategoriesDictionary = {
 	"thruster":thrusterDictionary,
 	"tank":tanksDictionary,
 	"structure":structureDictionary, 
+	"passage":passageDictionary,
+	"drive":driveDictionary
 }
 
 
 func _ready():
-
 	center_of_mass_mode = RigidBody3D.CENTER_OF_MASS_MODE_CUSTOM
 
 func _process(delta):
 	pass
+	
 func _physics_process(delta):
 	pass
 
@@ -72,7 +75,8 @@ func addBlock(placePos:Vector3, rot:Quaternion, block_name:String):
 			print("Not placed, %s" % [checkPos])
 			return
 		tempBlocks[checkPos] = newBlockDictionary[blockSize]
-	add_unique_block(placePos, newBlock)
+	for pos in tempBlocks:
+		add_unique_block(pos, tempBlocks.get(pos))
 	blocks.merge(tempBlocks)
 	tempBlocks.clear()
 	update_mass()
@@ -81,14 +85,13 @@ func remove_block(target) -> void:
 	if target == null:
 		return
 	var targetSubblocks = target.get_subblocks().values()
-	remove_unique_block(blocks.find_key(target), target)
 	for subblock in targetSubblocks:
+		remove_unique_block(blocks.find_key(subblock), subblock)
 		blocks.erase(blocks.find_key(subblock))
 		subblock.remove()
 	if blocks.size() < 1:
 		self.queue_free()
 		return
-	
 	update_structure()
 	update_mass()
 
@@ -172,7 +175,8 @@ func new_ship_from_blocks(broken:Array):
 	newShip.blocks = newShipDictionary
 	newShip.update_mass()
 	self.update_mass()
-
+	newShip.set_axis_velocity(self.linear_velocity)
+	newShip.angular_velocity = self.angular_velocity
 
 func get_neighbors(blockpos):
 	var neighbors = []
@@ -193,11 +197,11 @@ func get_neighbors(blockpos):
 func get_dictionary():
 	return blocks	
 
-func add_unique_block(pos, block_ref):
+func add_unique_block(pos:Vector3, block_ref:Node):
 	if block_ref.category in blockManifest.block_categories :
 		blockCategoriesDictionary[block_ref.category][pos] = block_ref
 
-func remove_unique_block(pos, block_ref):
+func remove_unique_block(pos:Vector3, block_ref:Node):
 	if block_ref.category in blockManifest.block_categories :
 		blockCategoriesDictionary[block_ref.category].erase(pos)
 

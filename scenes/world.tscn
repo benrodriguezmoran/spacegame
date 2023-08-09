@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/UI_controller.gd" id="2_pbsoq"]
 [ext_resource type="Environment" uid="uid://dckas8pn11ksi" path="res://environment.tres" id="3_d7swh"]
 [ext_resource type="PackedScene" uid="uid://coa11mnhy1ph8" path="res://scenes/_player.tscn" id="3_vrwyv"]
-[ext_resource type="PackedScene" uid="uid://clgkc04o6f6ca" path="res://scenes/ship.tscn" id="8_aicjf"]
+[ext_resource type="PackedScene" uid="uid://bmsull6uwti7j" path="res://scenes/ship.tscn" id="8_aicjf"]
 
 [sub_resource type="World3D" id="World3D_qwyru"]
 environment = ExtResource("3_d7swh")
@@ -13,6 +13,7 @@ environment = ExtResource("3_d7swh")
 script = ExtResource("1_nrpeo")
 
 [node name="UI_controller" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,7 +23,6 @@ grow_vertical = 2
 script = ExtResource("2_pbsoq")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="UI_controller"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -52,10 +52,10 @@ far = 16384.0
 [node name="Player" parent="frame" instance=ExtResource("3_vrwyv")]
 rotation_edit_mode = 1
 
-[node name="Ship Controller" parent="frame" instance=ExtResource("8_aicjf")]
+[node name="ship" parent="frame" instance=ExtResource("8_aicjf")]
 transform = Transform3D(1, 0, 0, 0, -0.119565, -0.992826, 0, 0.992826, -0.119565, -0.342268, 3.79498, -13.544)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("3_d7swh")
 
-[editable path="frame/Ship Controller"]
+[editable path="frame/ship"]

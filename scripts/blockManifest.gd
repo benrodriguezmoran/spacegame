@@ -2,7 +2,7 @@ extends Node
 #Block Manifest
 
 
-@export var block_categories = ["structure","drive","thruster","control"]
+@export var block_categories = ["structure","drive","thruster","control","tank","passage"]
 @export var blocks = {
 	"structure_block": {
 		"scene":preload("res://scenes/parts/structure_block.tscn"),
@@ -31,6 +31,13 @@ extends Node
 		"size":Vector3(1,1,1),
 		"mass":500,
 		"category":"thruster",
+		},
+	"passage": {
+		"scene":preload("res://scenes/parts/thruster_5.tscn"),
+		"mesh":preload("res://scenes/meshscenes/thruster5.tscn"),
+		"size":Vector3(1,1,1),
+		"mass":100,
+		"category":"passage",
 		}
 	}
 # Called when the node enters the scene tree for the first time.

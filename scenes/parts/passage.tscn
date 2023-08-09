@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnuxdi41yf33x"]
+
+[ext_resource type="Script" path="res://scripts/block.gd" id="1_aljjr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gg6x5"]
+size = Vector3(3, 3, 3)
+
+[node name="passage" type="Area3D"]
+script = ExtResource("1_aljjr")
+
+[node name="BoundingBox" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_gg6x5")
+
+[node name="passage_controller" type="Node3D" parent="."]
