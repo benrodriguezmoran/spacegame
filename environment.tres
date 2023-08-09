@@ -1,26 +1,29 @@
-[gd_resource type="Environment" load_steps=4 format=3 uid="uid://dckas8pn11ksi"]
+[gd_resource type="Environment" load_steps=5 format=3 uid="uid://dckas8pn11ksi"]
 
+[ext_resource type="Shader" path="res://shaders/sky.gdshader" id="1_axdgw"]
 [ext_resource type="Texture2D" uid="uid://chpdhychaoxco" path="res://images/eso0932a.png" id="1_oeetw"]
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_8aj25"]
-panorama = ExtResource("1_oeetw")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ia5cp"]
+shader = ExtResource("1_axdgw")
+shader_parameter/cameraSaturation = 1.0
+shader_parameter/source_panorama = ExtResource("1_oeetw")
 
 [sub_resource type="Sky" id="Sky_hngk1"]
-sky_material = SubResource("PanoramaSkyMaterial_8aj25")
+sky_material = SubResource("ShaderMaterial_ia5cp")
 process_mode = 3
 radiance_size = 6
 
 [resource]
 background_mode = 2
-background_energy_multiplier = 0.37
+background_energy_multiplier = 0.57
 sky = SubResource("Sky_hngk1")
 sky_rotation = Vector3(6.28319, 0, 0)
 ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 16.0
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.0
+tonemap_white = 0.23
 ssao_enabled = true
-ssao_radius = 1.3
-ssao_intensity = 2.58
 ssil_enabled = true
 glow_enabled = true
 glow_normalized = true
@@ -34,6 +37,5 @@ glow_hdr_luminance_cap = 25.84
 glow_map_strength = 0.25
 volumetric_fog_density = 0.011
 adjustment_enabled = true
-adjustment_brightness = 0.77
 adjustment_contrast = 1.34
 adjustment_saturation = 1.07
