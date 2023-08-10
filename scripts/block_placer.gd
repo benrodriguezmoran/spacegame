@@ -1,6 +1,6 @@
-extends RayCast3D
-var rayCast = self
-var selectedBlock 
+extends Node
+@onready var rayCast = $".."
+
 @export var placeTarget:Node 
 var placeNormal:Vector3
 var placeReference:Vector3
@@ -15,12 +15,7 @@ var lastBlock
 func _ready():
 	pass # Replace with function body.
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	get_inputs()
-	check_ray()
-
-func get_inputs():
+func check_ray(selectedBlock:String):	#placement raycast, calls target ship controller, will check what block is placed
 	if Input.is_action_just_pressed("flipX"):
 		placeRotation *= Quaternion(Vector3(1,0,0), -PI/2)
 	if Input.is_action_just_pressed("flipX-"):
@@ -38,7 +33,7 @@ func get_inputs():
 	if Input.is_action_just_pressed("right_click") && placeTarget != null && targetShip is RigidBody3D:
 		targetShip.remove_block(placeTarget)
 
-func check_ray():	#placement raycast, calls target ship controller, will check what block is placed
+
 	if selectedBlock == null: return
 	if !rayCast.is_colliding():
 		if lastTargetShip != null:
@@ -62,5 +57,4 @@ func check_ray():	#placement raycast, calls target ship controller, will check w
 	lastTargetShip = targetShip
 	placeReference = targetShip.preselect(placeTarget,placeNormal,placeRotation,selectedBlock)
 
-func _on_player_ui_block_selection(block_name):
-	selectedBlock = block_name
+

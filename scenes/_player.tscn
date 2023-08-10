@@ -1,6 +1,7 @@
-[gd_scene load_steps=30 format=3 uid="uid://coa11mnhy1ph8"]
+[gd_scene load_steps=31 format=3 uid="uid://coa11mnhy1ph8"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_w4ci4"]
+[ext_resource type="Script" path="res://scripts/interaction_cast.gd" id="2_32g0b"]
 [ext_resource type="Script" path="res://scripts/block_placer.gd" id="2_w0s5i"]
 [ext_resource type="Script" path="res://scripts/fps.gd" id="3_6xag1"]
 [ext_resource type="Script" path="res://components/movement_component.gd" id="3_fifyd"]
@@ -101,12 +102,19 @@ spot_range = 321.672
 spot_attenuation = 1.36604
 spot_angle = 53.87
 
-[node name="block_placer" type="RayCast3D" parent="."]
+[node name="interaction_raycast" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.459441, 0)
 target_position = Vector3(0, -10.005, 0)
 collide_with_areas = true
 collide_with_bodies = false
+script = ExtResource("2_32g0b")
+
+[node name="block_placement" type="Node" parent="interaction_raycast"]
 script = ExtResource("2_w0s5i")
+
+[node name="Node2" type="Node" parent="interaction_raycast"]
+
+[node name="Node3" type="Node" parent="interaction_raycast"]
 
 [node name="movement_component" type="Node" parent="."]
 script = ExtResource("3_fifyd")
@@ -122,6 +130,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_x2ja2")
@@ -225,4 +235,4 @@ offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("6_is5yq")
 
-[connection signal="block_selection" from="player_UI" to="block_placer" method="_on_player_ui_block_selection"]
+[connection signal="hotbar_selection" from="player_UI" to="interaction_raycast" method="_on_player_ui_hotbar_selection"]

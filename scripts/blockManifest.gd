@@ -40,6 +40,13 @@ extends Node
 		"category":"passage",
 		}
 	}
+@export var tools = ["wall","door"]
+#@export var props = {
+#	"control_seat":{
+#		"scene":preload(),
+#		"mesh":preload()
+#	}
+#}
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass

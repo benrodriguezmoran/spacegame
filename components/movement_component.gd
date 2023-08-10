@@ -2,7 +2,6 @@ extends Node
 @export var current_state:Node
 @onready var jetpackState = $jetpackState
 @onready var walkState = $walkState
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	current_state = jetpackState
