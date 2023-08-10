@@ -69,7 +69,7 @@ func addBlock(placePos:Vector3, rot:Quaternion, block_name:String):
 	for blockSize in newBlockDictionary:
 		var checkPos = round(placePos + (rot * blockSize))
 		if blocks.has(checkPos):
-			remove_child(newBlock)
+			newBlock.remove()
 			tempBlocks.clear()
 			print("Not placed, %s" % [checkPos])
 			return

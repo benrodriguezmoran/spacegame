@@ -90,14 +90,14 @@ fov = 110.0
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.653888, 0)
-light_energy = 9.983
+light_energy = 3.0
 spot_range = 321.672
 spot_attenuation = 1.36604
 spot_angle = 53.87
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.653888, 0)
-light_energy = 9.983
+light_energy = 3.0
 spot_range = 321.672
 spot_attenuation = 1.36604
 spot_angle = 53.87

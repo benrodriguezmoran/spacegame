@@ -14,7 +14,7 @@ extends Node
 	"drive_9m": {
 		"scene":preload("res://scenes/parts/drive_9m.tscn"),
 		"mesh":preload("res://scenes/meshscenes/drive_3x3.tscn"),
-		"size":Vector3(3,3,3),
+		"size":Vector3(3,5,3),
 		"mass":200,
 		"category":"drive",
 		},
@@ -43,8 +43,9 @@ extends Node
 @export var tools = ["wall","door"]
 #@export var props = {
 #	"control_seat":{
-#		"scene":preload(),
-#		"mesh":preload()
+#		"scene":preload("res://scenes/props/control_seat.tscn"),
+#		"mesh":preload("res://scenes/meshscenes/control_seat.tscn"),
+#		"category":"control"
 #	}
 #}
 # Called when the node enters the scene tree for the first time.

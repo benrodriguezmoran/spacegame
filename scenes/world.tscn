@@ -51,6 +51,7 @@ far = 16384.0
 [node name="Node3D" type="Node3D" parent="UI_controller/SubViewportContainer/SubViewport"]
 
 [node name="ItemList" type="ItemList" parent="UI_controller"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

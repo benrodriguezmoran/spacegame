@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bquqochhjig41"]
+
+[ext_resource type="ArrayMesh" uid="uid://dph660bb0j0n3" path="res://models/control_seat.obj" id="1_m16sh"]
+
+[node name="control_seat" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.150518, 1.42468, 0)
+mesh = ExtResource("1_m16sh")
