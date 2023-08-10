@@ -3,20 +3,18 @@
 [ext_resource type="Shader" path="res://shaders/sky.gdshader" id="1_axdgw"]
 [ext_resource type="Texture2D" uid="uid://chpdhychaoxco" path="res://images/eso0932a.png" id="1_oeetw"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ia5cp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j2eqj"]
 shader = ExtResource("1_axdgw")
 shader_parameter/cameraSaturation = 1.0
 shader_parameter/source_panorama = ExtResource("1_oeetw")
 
-[sub_resource type="Sky" id="Sky_hngk1"]
-sky_material = SubResource("ShaderMaterial_ia5cp")
-process_mode = 3
-radiance_size = 6
+[sub_resource type="Sky" id="Sky_6s2ma"]
+sky_material = SubResource("ShaderMaterial_j2eqj")
 
 [resource]
 background_mode = 2
 background_energy_multiplier = 0.57
-sky = SubResource("Sky_hngk1")
+sky = SubResource("Sky_6s2ma")
 sky_rotation = Vector3(6.28319, 0, 0)
 ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)

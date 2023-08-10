@@ -20,7 +20,7 @@ func movement_process():
 	inputForce.z = Input.get_axis("fore","aft")
 	inputForce.x = Input.get_axis("left","right")
 	inputForce.y = Input.get_axis("down","up")
-	inputForce = playerBody.transform.basis * inputForce.normalized()
+	inputForce = playerBody.basis * inputForce.normalized()
 	var roll = -Input.get_axis("roll_left","roll_right")*roll_sensitivity
 	
 	playerBody.apply_central_force(inputForce * thrust_multiplier)
