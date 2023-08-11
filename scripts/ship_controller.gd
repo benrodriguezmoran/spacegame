@@ -7,7 +7,7 @@ var totalMass = 0
 var selectedBlock
 var highlight
 const gridSize:int = 3
-
+signal block_added
 var thrusterDictionary = {}
 var tanksDictionary = {}
 var structureDictionary = {}
@@ -78,6 +78,7 @@ func addBlock(placePos:Vector3, rot:Quaternion, block_name:String):
 		add_unique_block(pos, tempBlocks.get(pos))
 	blocks.merge(tempBlocks)
 	tempBlocks.clear()
+	emit_signal("block_added", placePos)
 	update_mass()
 
 func remove_block(target) -> void:

@@ -68,3 +68,5 @@ mesh = ExtResource("3_ns34u")
 script = ExtResource("2_c2vk1")
 colliders = [NodePath("../passageWall"), NodePath("../passageWall2"), NodePath("../passageWall3"), NodePath("../passageWall4"), NodePath("../passageWall5"), NodePath("../passageWall6")]
 walls = [NodePath("../Plate"), NodePath("../Plate2"), NodePath("../Plate3"), NodePath("../Plate4"), NodePath("../Plate5"), NodePath("../Plate6")]
+
+[connection signal="type_set" from="." to="passage_controller" method="_on_passage_type_set"]

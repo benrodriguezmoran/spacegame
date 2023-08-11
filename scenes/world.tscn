@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dla6rwishj5vb"]
+[gd_scene load_steps=7 format=3 uid="uid://dla6rwishj5vb"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_nrpeo"]
 [ext_resource type="Script" path="res://scripts/UI_controller.gd" id="2_pbsoq"]
@@ -8,9 +8,6 @@
 
 [sub_resource type="World3D" id="World3D_qwyru"]
 environment = ExtResource("3_d7swh")
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rj7e2"]
-size = Vector2(32, 32)
 
 [node name="world" type="Node"]
 script = ExtResource("1_nrpeo")
@@ -49,33 +46,6 @@ size = 70.622
 far = 16384.0
 
 [node name="Node3D" type="Node3D" parent="UI_controller/SubViewportContainer/SubViewport"]
-
-[node name="ItemList" type="ItemList" parent="UI_controller"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 218.0
-offset_top = 251.0
-offset_right = -219.0
-offset_bottom = -44.0
-grow_horizontal = 2
-grow_vertical = 2
-item_count = 6
-max_columns = 10
-same_column_width = true
-item_0/text = ""
-item_0/icon = SubResource("PlaceholderTexture2D_rj7e2")
-item_1/text = ""
-item_1/icon = SubResource("PlaceholderTexture2D_rj7e2")
-item_2/text = ""
-item_2/icon = SubResource("PlaceholderTexture2D_rj7e2")
-item_3/text = ""
-item_3/icon = SubResource("PlaceholderTexture2D_rj7e2")
-item_4/text = ""
-item_4/icon = SubResource("PlaceholderTexture2D_rj7e2")
-item_5/text = ""
 
 [node name="frame" type="Node3D" parent="."]
 

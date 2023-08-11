@@ -6,13 +6,12 @@ var mass = 0
 var type 
 var category
 var parentShip 
-
+signal type_set
 func _init():
 	pass
 
 func _ready():
-	parentShip = get_parent() if get_parent() is RigidBody3D else get_parent().get_parent()
-	
+	pass
 
 func _process(delta):
 	pass
@@ -22,8 +21,6 @@ func set_type(block_name, parent:Node):
 	type = block_name
 	mass = blockManifest.blocks[block_name]["mass"]
 	category = blockManifest.blocks[block_name]["category"]
-		
-		
 	for child in get_children():
 		if child is CollisionShape3D && child.name != "BoundingBox":
 			colliders.append(child)
@@ -34,6 +31,7 @@ func set_type(block_name, parent:Node):
 			child.mass = blockManifest.blocks[block_name]["mass"]
 			child.parentShip = get_parent()
 			child.category = blockManifest.blocks[block_name]["category"]
+	emit_signal("type_set")
 
 func get_parentship():
 	return parentShip
