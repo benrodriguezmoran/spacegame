@@ -57,11 +57,11 @@ transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114
 mesh = ExtResource("3_ns34u")
 
 [node name="Plate5" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.91069e-15, 4.37114e-08, 1, -8.74228e-08, -1, 4.37114e-08, 1, -8.74228e-08, 1.91069e-15, 0, 0, 0)
+transform = Transform3D(-9.55343e-15, -1.31134e-07, -1, 8.74228e-08, 1, -1.31134e-07, 1, -8.74228e-08, 1.91069e-15, 0, 0, 0)
 mesh = ExtResource("3_ns34u")
 
 [node name="Plate6" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1.74846e-07, 1, -4.37114e-08, -1, 1.74846e-07, -5.73206e-15, 0, 0, 0)
+transform = Transform3D(1.33748e-14, 4.37114e-08, -1, -1.74846e-07, -1, -4.37114e-08, -1, 1.74846e-07, -5.73206e-15, 0, 0, 0)
 mesh = ExtResource("3_ns34u")
 
 [node name="passage_controller" type="Node" parent="."]
