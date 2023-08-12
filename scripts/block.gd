@@ -24,13 +24,14 @@ func set_type(block_name, parent:Node):
 	for child in get_children():
 		if child is CollisionShape3D && child.name != "BoundingBox":
 			colliders.append(child)
-			child.reparent.call_deferred(parentShip)	
+			child.reparent.call_deferred(parent)
 		if child is Area3D:
 			child.set_script(load("res://scripts/block.gd"))
 			child.type = block_name
 			child.mass = blockManifest.blocks[block_name]["mass"]
-			child.parentShip = get_parent()
+			child.parentShip = parent
 			child.category = blockManifest.blocks[block_name]["category"]
+			child.reparent.call_deferred(parent)
 	emit_signal("type_set")
 
 func get_parentship():

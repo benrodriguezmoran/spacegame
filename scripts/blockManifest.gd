@@ -15,7 +15,7 @@ extends Node
 		"scene":preload("res://scenes/parts/drive_9m.tscn"),
 		"mesh":preload("res://scenes/meshscenes/drive_3x3.tscn"),
 		"size":Vector3(3,5,3),
-		"mass":200,
+		"mass":12000,
 		"category":"drive",
 		},
 	"thruster": {

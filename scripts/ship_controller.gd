@@ -178,19 +178,19 @@ func new_ship_from_blocks(broken:Array):
 	newShip.set_axis_velocity(self.linear_velocity)
 	newShip.angular_velocity = self.angular_velocity
 
-func get_neighbors(blockpos):
+func get_neighbors(blockpos, workingDictionary:Dictionary=blocks):
 	var neighbors = []
 	for x in [-1,1]:
 		var neighbor = blockpos + Vector3(x,0,0)
-		if blocks.has(neighbor):
+		if workingDictionary.has(neighbor):
 			neighbors.append(neighbor)
 	for y in [-1,1]:
 		var neighbor = blockpos + Vector3(0,y,0)
-		if blocks.has(neighbor):
+		if workingDictionary.has(neighbor):
 			neighbors.append(neighbor)
 	for z in [-1,1]:
 		var neighbor = blockpos + Vector3(0,0,z)
-		if blocks.has(neighbor):
+		if workingDictionary.has(neighbor):
 			neighbors.append(neighbor)
 	return neighbors
 
