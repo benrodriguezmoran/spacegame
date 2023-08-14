@@ -40,6 +40,51 @@ shape = SubResource("BoxShape3D_wmj62")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, 0)
 shape = SubResource("BoxShape3D_wmj62")
 
+[node name="passage_controller" type="Node" parent="."]
+script = ExtResource("2_c2vk1")
+
+[node name="wall_controller" type="Area3D" parent="passage_controller"]
+collision_layer = 2
+
+[node name="passageWall" type="CollisionShape3D" parent="passage_controller/wall_controller"]
+transform = Transform3D(0.00148229, 0.999999, 0.000579221, -0.999999, 0.00148248, -0.000318652, -0.000319507, -0.00057875, 1, -1.45, 0, 0)
+shape = SubResource("BoxShape3D_wmj62")
+
+[node name="wall_controller2" type="Area3D" parent="passage_controller"]
+collision_layer = 2
+
+[node name="passageWall2" type="CollisionShape3D" parent="passage_controller/wall_controller2"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.45, 0, 0)
+shape = SubResource("BoxShape3D_wmj62")
+
+[node name="wall_controller3" type="Area3D" parent="passage_controller"]
+collision_layer = 2
+
+[node name="passageWall3" type="CollisionShape3D" parent="passage_controller/wall_controller3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 1.45)
+shape = SubResource("BoxShape3D_wmj62")
+
+[node name="wall_controller4" type="Area3D" parent="passage_controller"]
+collision_layer = 2
+
+[node name="passageWall4" type="CollisionShape3D" parent="passage_controller/wall_controller4"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -1.45)
+shape = SubResource("BoxShape3D_wmj62")
+
+[node name="wall_controller5" type="Area3D" parent="passage_controller"]
+collision_layer = 2
+
+[node name="passageWall5" type="CollisionShape3D" parent="passage_controller/wall_controller5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.45, 0)
+shape = SubResource("BoxShape3D_wmj62")
+
+[node name="wall_controller6" type="Area3D" parent="passage_controller"]
+collision_layer = 2
+
+[node name="passageWall6" type="CollisionShape3D" parent="passage_controller/wall_controller6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, 0)
+shape = SubResource("BoxShape3D_wmj62")
+
 [node name="Plate" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 mesh = ExtResource("3_ns34u")
@@ -63,8 +108,5 @@ mesh = ExtResource("3_ns34u")
 [node name="Plate6" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.33748e-14, 4.37114e-08, -1, -1.74846e-07, -1, -4.37114e-08, -1, 1.74846e-07, -5.73206e-15, 0, 0, 0)
 mesh = ExtResource("3_ns34u")
-
-[node name="passage_controller" type="Node" parent="."]
-script = ExtResource("2_c2vk1")
 
 [connection signal="type_set" from="." to="passage_controller" method="_on_passage_type_set"]

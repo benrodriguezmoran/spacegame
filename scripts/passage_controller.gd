@@ -24,9 +24,9 @@ func _process(delta):
 
 func _on_passage_type_set():
 	block = get_parent()
-	block.parentShip.connect("block_added", Callable(self, "on_block_added"))
+	block.parentShip.connect("block_added", Callable(self, "block_added"))
 	
-func on_block_added(placePos):
+func block_added(placePos):
 	var blockPos = block.parentShip.blocks.find_key(block)
 	if placePos != blockPos: return
 	for child in get_parent().get_children():
@@ -40,9 +40,12 @@ func on_block_added(placePos):
 		var blockRelative = blockPos - neighborPos
 		var neighborPassage = neighborBlock.get_node("passage_controller")
 		if direction.has(blockRelative):
-			var checkDirection = direction[blockRelative][0]
-			var invCheckDirection = direction[blockRelative][1]
-			colliders[checkDirection].disabled = true
-			walls[checkDirection].visible = false
-			neighborPassage.colliders[invCheckDirection].disabled = true
-			neighborPassage.walls[invCheckDirection].visible = false
+			toggle_wall(blockRelative)
+			neighborPassage.toggle_wall(-blockRelative)
+#			neighborPassage.colliders[invCheckDirection].disabled = true
+#			neighborPassage.walls[invCheckDirection].visible = false
+func toggle_wall(blockRelative,checkState:bool=false):
+	var checkDirection = direction[blockRelative][0]
+	var invCheckDirection = direction[blockRelative][1]
+	colliders[checkDirection].disabled = !checkState
+	walls[checkDirection].visible = checkState

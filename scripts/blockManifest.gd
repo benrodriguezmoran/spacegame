@@ -8,7 +8,7 @@ extends Node
 		"scene":preload("res://scenes/parts/structure_block.tscn"),
 		"mesh":preload("res://scenes/meshscenes/frame_1x_1.tscn"),
 		"size":Vector3(1,1,1),
-		"mass":100,
+		"mass":800,
 		"category":"structure",
 		},
 	"drive_9m": {
@@ -22,21 +22,21 @@ extends Node
 		"scene":preload("res://scenes/parts/thruster.tscn"),
 		"mesh":preload("res://scenes/meshscenes/thruster.tscn"),
 		"size":Vector3(1,1,1),
-		"mass":500,
+		"mass":5000,
 		"category":"thruster",
 		},
 	"thruster_5": {
 		"scene":preload("res://scenes/parts/thruster_5.tscn"),
 		"mesh":preload("res://scenes/meshscenes/thruster5.tscn"),
 		"size":Vector3(1,1,1),
-		"mass":500,
+		"mass":5500,
 		"category":"thruster",
 		},
 	"passage": {
 		"scene":preload("res://scenes/parts/passage.tscn"),
 		"mesh":preload("res://scenes/meshscenes/passage.tscn"),
 		"size":Vector3(1,1,1),
-		"mass":200,
+		"mass":1200,
 		"category":"passage",
 		}
 	}

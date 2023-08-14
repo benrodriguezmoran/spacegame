@@ -1,5 +1,6 @@
 extends Node
 @onready var firstship = $"frame/ship"
+@onready var player = $frame/Player
 var mousemode:bool
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,3 +21,7 @@ func _input(input):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN) if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED else DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	if Input.is_action_just_pressed("ui_cancel"): #QUIT
 		get_tree().quit()
+#func _physics_process(delta):
+#	player.apply_central_force(Vector3(0,2,0) * player.mass)
+#	firstship.apply_central_force(Vector3(0,2,0) * firstship.mass)
+#
