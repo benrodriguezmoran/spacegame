@@ -54,6 +54,7 @@ func check_ray(selectedBlock:String):	#placement raycast, calls target ship cont
 		targetShip.addBlock(placeReference,placeRotation,selectedBlock)
 	if Input.is_action_just_pressed("right_click") && placeTarget != null && targetShip is RigidBody3D:
 		targetShip.remove_block(placeTarget)
+	
 
 func _on_interaction_raycast_transitioned_state(state):
 	if state == self:
