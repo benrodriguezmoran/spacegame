@@ -1,5 +1,5 @@
 extends Node
-
+@onready var rayCast = $".."
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -7,9 +7,14 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func check_ray():
-	pass
+func check_ray(selectedTool:String):
+	if !rayCast.is_colliding():
+		return
+	
 
 
 func _on_interaction_raycast_transitioned_state(state):
-	pass # Replace with function body.
+	if state == self:
+		rayCast.set_collision_mask_value(2, true)
+	else:
+		rayCast.set_collision_mask_value(2, false)

@@ -28,11 +28,6 @@ func check_ray(selectedBlock:String):	#placement raycast, calls target ship cont
 		placeRotation *= Quaternion(Vector3(0,1,0), PI/2)
 	if Input.is_action_just_pressed("flipZ-"):
 		placeRotation *= Quaternion(Vector3(0,1,0), -PI/2)
-	if Input.is_action_just_pressed("left_click") && placeTarget != null:
-		targetShip.addBlock(placeReference,placeRotation,selectedBlock)
-	if Input.is_action_just_pressed("right_click") && placeTarget != null && targetShip is RigidBody3D:
-		targetShip.remove_block(placeTarget)
-
 
 	if selectedBlock == null: return
 	if !rayCast.is_colliding():
@@ -48,15 +43,17 @@ func check_ray(selectedBlock:String):	#placement raycast, calls target ship cont
 	if targetShip == null:
 		return
 	placeNormal = rayCast.get_collision_normal()
-	if (placeTarget != lastPlaceTarget or placeNormal != lastPlaceNormal):
-		if lastTargetShip != null && targetShip != lastTargetShip:
-			lastTargetShip.preselect(null, Vector3.ZERO, placeRotation, selectedBlock)
-			return
+	if lastTargetShip != null and targetShip != lastTargetShip:
+		lastTargetShip.preselect(null, Vector3.ZERO, placeRotation, selectedBlock)
+		lastTargetShip = null
 	lastPlaceTarget = placeTarget
 	lastPlaceNormal = placeNormal
 	lastTargetShip = targetShip
 	placeReference = targetShip.preselect(placeTarget,placeNormal,placeRotation,selectedBlock)
-
+	if Input.is_action_just_pressed("left_click") && placeTarget != null:
+		targetShip.addBlock(placeReference,placeRotation,selectedBlock)
+	if Input.is_action_just_pressed("right_click") && placeTarget != null && targetShip is RigidBody3D:
+		targetShip.remove_block(placeTarget)
 
 func _on_interaction_raycast_transitioned_state(state):
 	if state == self:

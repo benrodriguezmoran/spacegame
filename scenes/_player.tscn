@@ -112,10 +112,10 @@ script = ExtResource("2_32g0b")
 [node name="block_placement" type="Node" parent="interaction_raycast"]
 script = ExtResource("2_w0s5i")
 
-[node name="prop_placement" type="Node" parent="interaction_raycast"]
-
 [node name="wall_tool" type="Node" parent="interaction_raycast"]
 script = ExtResource("4_kxnjw")
+
+[node name="prop_placement" type="Node" parent="interaction_raycast"]
 
 [node name="movement_component" type="Node" parent="."]
 script = ExtResource("3_fifyd")

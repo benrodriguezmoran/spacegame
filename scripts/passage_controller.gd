@@ -42,10 +42,10 @@ func block_added(placePos):
 		if direction.has(blockRelative):
 			toggle_wall(blockRelative)
 			neighborPassage.toggle_wall(-blockRelative)
-#			neighborPassage.colliders[invCheckDirection].disabled = true
-#			neighborPassage.walls[invCheckDirection].visible = false
+
 func toggle_wall(blockRelative,checkState:bool=false):
 	var checkDirection = direction[blockRelative][0]
 	var invCheckDirection = direction[blockRelative][1]
 	colliders[checkDirection].disabled = !checkState
 	walls[checkDirection].visible = checkState
+
