@@ -1,7 +1,10 @@
 extends RayCast3D
 @export var current_state:Node
 @onready var block_placement:Node = $block_placement
-var selectedBlock 
+@onready var wall_tool:Node
+@onready var prop_placement:Node
+var selectedTool:String
+signal transitioned_state(state)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -11,9 +14,15 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if current_state != null:
-		current_state.check_ray(selectedBlock)
+		current_state.check_ray(selectedTool)
 	
-func _on_player_ui_hotbar_selection(block_name):
-	selectedBlock = block_name
-	if block_name in blockManifest.blocks.keys():
+func _on_player_ui_hotbar_selection(toolName):
+	
+	if toolName in blockManifest.blocks.keys():
+		selectedTool = toolName
 		current_state = block_placement
+		emit_signal("transitioned_state", block_placement)
+	if toolName in blockManifest.tools:
+		selectedTool = toolName
+		current_state = wall_tool
+		emit_signal("transitioned_state", wall_tool)

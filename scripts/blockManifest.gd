@@ -40,14 +40,14 @@ extends Node
 		"category":"passage",
 		}
 	}
-@export var tools = ["wall","door"]
-#@export var props = {
-#	"control_seat":{
-#		"scene":preload("res://scenes/props/control_seat.tscn"),
-#		"mesh":preload("res://scenes/meshscenes/control_seat.tscn"),
-#		"category":"control"
-#	}
-#}
+@export var tools = ["wall","open","door"]
+@export var props = {
+	"control_seat":{
+		"scene":preload("res://scenes/props/control_seat.tscn"),
+		"mesh":preload("res://scenes/meshscenes/control_seat.tscn"),
+		"category":"control"
+	}
+}
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass

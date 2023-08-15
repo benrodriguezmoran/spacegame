@@ -2,7 +2,7 @@ extends Node
 @onready var rayCast = $".."
 
 @export var placeTarget:Node 
-var placeNormal:Vector3
+@export var placeNormal:Vector3
 var placeReference:Vector3
 var lastPlaceTarget
 var lastPlaceNormal
@@ -58,3 +58,12 @@ func check_ray(selectedBlock:String):	#placement raycast, calls target ship cont
 	placeReference = targetShip.preselect(placeTarget,placeNormal,placeRotation,selectedBlock)
 
 
+func _on_interaction_raycast_transitioned_state(state):
+	if state == self:
+		rayCast.set_collision_mask_value(1, true)
+	else:
+		rayCast.set_collision_mask_value(1, false)
+	if lastTargetShip != null:
+		lastTargetShip.preselect(null, Vector3.ZERO, placeRotation, "structure_block")
+		lastTargetShip = null
+		

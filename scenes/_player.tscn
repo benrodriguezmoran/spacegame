@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://coa11mnhy1ph8"]
+[gd_scene load_steps=32 format=3 uid="uid://coa11mnhy1ph8"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_w4ci4"]
 [ext_resource type="Script" path="res://scripts/interaction_cast.gd" id="2_32g0b"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://components/movement_component.gd" id="3_fifyd"]
 [ext_resource type="Script" path="res://scripts/player_ui.gd" id="3_x2ja2"]
 [ext_resource type="Script" path="res://scripts/walk_component.gd" id="4_iw75s"]
+[ext_resource type="Script" path="res://scripts/wall_tool.gd" id="4_kxnjw"]
 [ext_resource type="Script" path="res://scripts/jetpack_component.gd" id="5_8qltw"]
 [ext_resource type="Script" path="res://scripts/debugUI.gd" id="6_is5yq"]
 
@@ -113,7 +114,8 @@ script = ExtResource("2_w0s5i")
 
 [node name="prop_placement" type="Node" parent="interaction_raycast"]
 
-[node name="Node3" type="Node" parent="interaction_raycast"]
+[node name="wall_tool" type="Node" parent="interaction_raycast"]
+script = ExtResource("4_kxnjw")
 
 [node name="movement_component" type="Node" parent="."]
 script = ExtResource("3_fifyd")
@@ -234,4 +236,6 @@ offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("6_is5yq")
 
+[connection signal="transitioned_state" from="interaction_raycast" to="interaction_raycast/block_placement" method="_on_interaction_raycast_transitioned_state"]
+[connection signal="transitioned_state" from="interaction_raycast" to="interaction_raycast/wall_tool" method="_on_interaction_raycast_transitioned_state"]
 [connection signal="hotbar_selection" from="player_UI" to="interaction_raycast" method="_on_player_ui_hotbar_selection"]
