@@ -8,7 +8,7 @@ var category
 var parentShip 
 signal type_set
 func _init():
-	pass
+	self.set_meta("block", true)
 
 func _ready():
 	pass

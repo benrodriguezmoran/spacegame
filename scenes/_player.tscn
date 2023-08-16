@@ -107,6 +107,7 @@ target_position = Vector3(0, -10.005, 0)
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
+debug_shape_thickness = 1
 script = ExtResource("2_32g0b")
 
 [node name="block_placement" type="Node" parent="interaction_raycast"]

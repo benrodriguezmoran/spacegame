@@ -8,7 +8,7 @@ var lastPlaceTarget
 var lastPlaceNormal
 @export var targetShip:Node
 var lastTargetShip
-var placeRotation = Quaternion()
+var placeRotation:Quaternion = Quaternion()
 var lastBlock
 
 # Called when the node enters the scene tree for the first time.
@@ -38,7 +38,7 @@ func check_ray(selectedBlock:String):	#placement raycast, calls target ship cont
 			lastTargetShip = null
 		return 
 	placeTarget = rayCast.get_collider()
-	if placeTarget == null: return
+	if placeTarget == null or !placeTarget.has_meta("block"): return
 	targetShip = placeTarget.get_parentship()
 	if targetShip == null:
 		return
@@ -54,9 +54,8 @@ func check_ray(selectedBlock:String):	#placement raycast, calls target ship cont
 		targetShip.addBlock(placeReference,placeRotation,selectedBlock)
 	if Input.is_action_just_pressed("right_click") && placeTarget != null && targetShip is RigidBody3D:
 		targetShip.remove_block(placeTarget)
-	
 
-func _on_interaction_raycast_transitioned_state(state):
+func _on_interaction_raycast_transitioned_state(state:Node):
 	if state == self:
 		rayCast.set_collision_mask_value(1, true)
 	else:

@@ -1,4 +1,4 @@
-extends Node
+extends Node3D
 @export var colliders = []
 @export var walls = []
 @onready var block 
@@ -11,7 +11,9 @@ var direction = {
 	Vector3(0,1,0):[enumDirection.UP,enumDirection.DOWN],
 	Vector3(0,-1,0):[enumDirection.DOWN,enumDirection.UP],
 }
-var neighbors
+var wallInteractors = []
+var wallVectors = {}
+var neighbors = []
 
 # Called when the node enters the scene tree for the first time.
 func _init():
@@ -32,6 +34,10 @@ func block_added(placePos):
 	for child in get_parent().get_children():
 		if child is MeshInstance3D:
 			walls.append(child)
+		if child is Area3D:
+			wallInteractors.append(child)
+	for wall in wallInteractors:
+		wallVectors[wall] = direction.keys()[wallInteractors.find(wall)] 
 	colliders = block.colliders
 	block.rotation = Vector3(0,0,0)
 	neighbors = block.parentShip.get_neighbors(blockPos, block.parentShip.passageDictionary)
