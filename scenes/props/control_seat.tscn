@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://13tlgku4rv1"]
+
+[ext_resource type="PackedScene" uid="uid://bquqochhjig41" path="res://scenes/meshscenes/control_seat.tscn" id="1_wahnr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jsgfm"]
+size = Vector3(1.24121, 1.60184, 0.825326)
+
+[node name="control_seat" type="Area3D"]
+
+[node name="control_seat" parent="." instance=ExtResource("1_wahnr")]
+
+[node name="on_interaction" type="Node" parent="."]
+
+[node name="BoundingBox" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0262037, 0.803776, 0)
+shape = SubResource("BoxShape3D_jsgfm")

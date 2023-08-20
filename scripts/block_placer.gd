@@ -1,12 +1,12 @@
-extends RayCast3D
-var rayCast = self
-var selectedBlock 
-var placeTarget:Node 
-var placeNormal:Vector3
+extends Node
+@onready var rayCast = $".."
+
+@export var placeTarget:Node 
+@export var placeNormal:Vector3
 var placeReference:Vector3
 var lastPlaceTarget
 var lastPlaceNormal
-var targetShip
+@export var targetShip:Node
 var lastTargetShip
 var placeRotation = Quaternion()
 var lastBlock
@@ -15,12 +15,7 @@ var lastBlock
 func _ready():
 	pass # Replace with function body.
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	get_inputs()
-	check_ray()
-
-func get_inputs():
+func check_ray(selectedBlock:String):	#placement raycast, calls target ship controller, will check what block is placed
 	if Input.is_action_just_pressed("flipX"):
 		placeRotation *= Quaternion(Vector3(1,0,0), -PI/2)
 	if Input.is_action_just_pressed("flipX-"):
@@ -33,12 +28,7 @@ func get_inputs():
 		placeRotation *= Quaternion(Vector3(0,1,0), PI/2)
 	if Input.is_action_just_pressed("flipZ-"):
 		placeRotation *= Quaternion(Vector3(0,1,0), -PI/2)
-	if Input.is_action_just_pressed("left_click") && placeTarget != null:
-		targetShip.addBlock(placeReference,placeRotation,selectedBlock)
-	if Input.is_action_just_pressed("right_click") && targetShip is RigidBody3D:
-		targetShip.remove_block(placeTarget)
 
-func check_ray():	#placement raycast, calls target ship controller, will check what block is placed
 	if selectedBlock == null: return
 	if !rayCast.is_colliding():
 		if lastTargetShip != null:
@@ -53,14 +43,25 @@ func check_ray():	#placement raycast, calls target ship controller, will check w
 	if targetShip == null:
 		return
 	placeNormal = rayCast.get_collision_normal()
-	if (placeTarget != lastPlaceTarget or placeNormal != lastPlaceNormal):
-		if lastTargetShip != null && targetShip != lastTargetShip:
-			lastTargetShip.preselect(null, Vector3.ZERO, placeRotation, selectedBlock)
-			return
+	if lastTargetShip != null and targetShip != lastTargetShip:
+		lastTargetShip.preselect(null, Vector3.ZERO, placeRotation, selectedBlock)
+		lastTargetShip = null
 	lastPlaceTarget = placeTarget
 	lastPlaceNormal = placeNormal
 	lastTargetShip = targetShip
 	placeReference = targetShip.preselect(placeTarget,placeNormal,placeRotation,selectedBlock)
+	if Input.is_action_just_pressed("left_click") && placeTarget != null:
+		targetShip.addBlock(placeReference,placeRotation,selectedBlock)
+	if Input.is_action_just_pressed("right_click") && placeTarget != null && targetShip is RigidBody3D:
+		targetShip.remove_block(placeTarget)
+	
 
-func _on_player_ui_block_selection(block_name):
-	selectedBlock = block_name
+func _on_interaction_raycast_transitioned_state(state):
+	if state == self:
+		rayCast.set_collision_mask_value(1, true)
+	else:
+		rayCast.set_collision_mask_value(1, false)
+	if lastTargetShip != null:
+		lastTargetShip.preselect(null, Vector3.ZERO, placeRotation, "structure_block")
+		lastTargetShip = null
+		

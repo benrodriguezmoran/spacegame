@@ -4,34 +4,40 @@ var colliders = []
 var subblocks = {}
 var mass = 0
 var type 
-var parentship 
-
+var category
+var parentShip 
+signal type_set
 func _init():
 	pass
 
 func _ready():
-	parentship = get_parent() if get_parent() is RigidBody3D else get_parent().get_parent()
-	for child in get_children():		
-		if child is CollisionShape3D && child.name != "BoundingBox":
-			colliders.append(child)
-			child.reparent.call_deferred(parentship)
+	pass
 
 func _process(delta):
 	pass
 	
-func set_type(block_name):
+func set_type(block_name, parent:Node):
+	parentShip = parent
 	type = block_name
 	mass = blockManifest.blocks[block_name]["mass"]
-	for child in get_children():	
+	category = blockManifest.blocks[block_name]["category"]
+	for child in get_children():
+		if child is CollisionShape3D && child.name != "BoundingBox":
+			colliders.append(child)
+			child.reparent.call_deferred(parent)
 		if child is Area3D:
 			child.set_script(load("res://scripts/block.gd"))
 			child.type = block_name
 			child.mass = blockManifest.blocks[block_name]["mass"]
-			child.parentship = get_parent()
+			child.parentShip = parent
+			child.category = blockManifest.blocks[block_name]["category"]
+			child.reparent.call_deferred(parent)
+	emit_signal("type_set")
 
 func get_parentship():
-	return parentship
-
+	return parentShip
+func get_colliders():
+	return colliders
 func get_subblocks():
 	if subblocks.is_empty():
 		subblocks[self.position] = self

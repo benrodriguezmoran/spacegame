@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/UI_controller.gd" id="2_pbsoq"]
 [ext_resource type="Environment" uid="uid://dckas8pn11ksi" path="res://environment.tres" id="3_d7swh"]
 [ext_resource type="PackedScene" uid="uid://coa11mnhy1ph8" path="res://scenes/_player.tscn" id="3_vrwyv"]
-[ext_resource type="PackedScene" uid="uid://cwbf0vqnf4a0c" path="res://scenes/ship.tscn" id="8_aicjf"]
+[ext_resource type="PackedScene" uid="uid://bmsull6uwti7j" path="res://scenes/ship.tscn" id="8_aicjf"]
 
 [sub_resource type="World3D" id="World3D_qwyru"]
 environment = ExtResource("3_d7swh")
@@ -50,11 +50,16 @@ far = 16384.0
 [node name="frame" type="Node3D" parent="."]
 
 [node name="Player" parent="frame" instance=ExtResource("3_vrwyv")]
+rotation_edit_mode = 1
 
-[node name="Ship Controller" parent="frame" instance=ExtResource("8_aicjf")]
+[node name="ship" parent="frame" instance=ExtResource("8_aicjf")]
 transform = Transform3D(1, 0, 0, 0, -0.119565, -0.992826, 0, 0.992826, -0.119565, -0.342268, 3.79498, -13.544)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("3_d7swh")
 
-[editable path="frame/Ship Controller"]
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.848796, -0.232919, 0.474651, 0, 0.897736, 0.440535, -0.52872, -0.373924, 0.761995, 0, 0, 0)
+light_energy = 0.532
+light_indirect_energy = 0.0
+directional_shadow_max_distance = 322.5

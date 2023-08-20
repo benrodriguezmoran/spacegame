@@ -1,10 +1,15 @@
-[gd_scene load_steps=27 format=3 uid="uid://coa11mnhy1ph8"]
+[gd_scene load_steps=32 format=3 uid="uid://coa11mnhy1ph8"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_w4ci4"]
+[ext_resource type="Script" path="res://scripts/interaction_cast.gd" id="2_32g0b"]
 [ext_resource type="Script" path="res://scripts/block_placer.gd" id="2_w0s5i"]
 [ext_resource type="Script" path="res://scripts/fps.gd" id="3_6xag1"]
+[ext_resource type="Script" path="res://components/movement_component.gd" id="3_fifyd"]
 [ext_resource type="Script" path="res://scripts/player_ui.gd" id="3_x2ja2"]
+[ext_resource type="Script" path="res://scripts/walk_component.gd" id="4_iw75s"]
+[ext_resource type="Script" path="res://scripts/wall_tool.gd" id="4_kxnjw"]
 [ext_resource type="Script" path="res://scripts/jetpack_component.gd" id="5_8qltw"]
+[ext_resource type="Script" path="res://scripts/debugUI.gd" id="6_is5yq"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_epsm5"]
 radial_segments = 14
@@ -69,7 +74,6 @@ action = &"hotbar_9"
 events = [SubResource("InputEventAction_5gn8l")]
 
 [node name="Player" type="RigidBody3D"]
-rotation_edit_mode = 2
 mass = 100.0
 script = ExtResource("1_w4ci4")
 
@@ -83,37 +87,52 @@ shape = SubResource("CylinderShape3D_5t61o")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 0.476, -0.128418)
 current = true
-fov = 110.0
+fov = 90.0
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.653888, 0)
-light_energy = 9.983
 spot_range = 321.672
 spot_attenuation = 1.36604
 spot_angle = 53.87
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.653888, 0)
-light_energy = 9.983
 spot_range = 321.672
 spot_attenuation = 1.36604
 spot_angle = 53.87
 
-[node name="block_placer" type="RayCast3D" parent="."]
+[node name="interaction_raycast" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.459441, 0)
 target_position = Vector3(0, -10.005, 0)
+hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
+script = ExtResource("2_32g0b")
+
+[node name="block_placement" type="Node" parent="interaction_raycast"]
 script = ExtResource("2_w0s5i")
 
-[node name="jetpack_component" type="Node" parent="."]
+[node name="wall_tool" type="Node" parent="interaction_raycast"]
+script = ExtResource("4_kxnjw")
+
+[node name="prop_placement" type="Node" parent="interaction_raycast"]
+
+[node name="movement_component" type="Node" parent="."]
+script = ExtResource("3_fifyd")
+
+[node name="jetpackState" type="Node" parent="movement_component"]
 script = ExtResource("5_8qltw")
+
+[node name="walkState" type="Node" parent="movement_component"]
+script = ExtResource("4_iw75s")
 
 [node name="player_UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_x2ja2")
@@ -211,4 +230,12 @@ offset_bottom = 23.0
 grow_horizontal = 0
 script = ExtResource("3_6xag1")
 
-[connection signal="block_selection" from="player_UI" to="block_placer" method="_on_player_ui_block_selection"]
+[node name="DEBUG" type="Label" parent="player_UI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("6_is5yq")
+
+[connection signal="transitioned_state" from="interaction_raycast" to="interaction_raycast/block_placement" method="_on_interaction_raycast_transitioned_state"]
+[connection signal="transitioned_state" from="interaction_raycast" to="interaction_raycast/wall_tool" method="_on_interaction_raycast_transitioned_state"]
+[connection signal="hotbar_selection" from="player_UI" to="interaction_raycast" method="_on_player_ui_hotbar_selection"]

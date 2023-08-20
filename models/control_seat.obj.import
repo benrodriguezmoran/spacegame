@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dph660bb0j0n3"
+path="res://.godot/imported/control_seat.obj-fc25cef861a006c60bff18e22147fb14.mesh"
+
+[deps]
+
+files=["res://.godot/imported/control_seat.obj-fc25cef861a006c60bff18e22147fb14.mesh"]
+
+source_file="res://models/control_seat.obj"
+dest_files=["res://.godot/imported/control_seat.obj-fc25cef861a006c60bff18e22147fb14.mesh", "res://.godot/imported/control_seat.obj-fc25cef861a006c60bff18e22147fb14.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
