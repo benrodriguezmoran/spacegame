@@ -39,3 +39,11 @@ func movement_process():
 func _input(event):
 	if event is InputEventMouseMotion && Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED: #MOUSE_INPUT
 		mouse_delta = event.relative
+
+
+func _on_movement_component_transitioned_state(state):
+	if state == self:
+		pass
+	else:
+		playerBody.set_linear_damp(0)
+		playerBody.set_angular_damp(0)

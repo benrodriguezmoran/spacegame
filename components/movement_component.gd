@@ -2,6 +2,7 @@ extends Node
 @export var current_state:Node
 @onready var jetpackState = $jetpackState
 @onready var walkState = $walkState
+signal transitioned_state(state)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	current_state = jetpackState
@@ -11,9 +12,11 @@ func _physics_process(_delta):
 	current_state.movement_process()
 	if Input.is_action_just_released("jetpack"):
 		if current_state == jetpackState:
+			emit_signal("transitioned_state", walkState)
 			current_state = walkState
 		else:
 			current_state = jetpackState
+			emit_signal("transitioned_state", jetpackState)
 	
 
 	

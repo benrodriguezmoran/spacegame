@@ -239,4 +239,5 @@ script = ExtResource("6_is5yq")
 
 [connection signal="transitioned_state" from="interaction_raycast" to="interaction_raycast/block_placement" method="_on_interaction_raycast_transitioned_state"]
 [connection signal="transitioned_state" from="interaction_raycast" to="interaction_raycast/wall_tool" method="_on_interaction_raycast_transitioned_state"]
+[connection signal="transitioned_state" from="movement_component" to="movement_component/jetpackState" method="_on_movement_component_transitioned_state"]
 [connection signal="hotbar_selection" from="player_UI" to="interaction_raycast" method="_on_player_ui_hotbar_selection"]
