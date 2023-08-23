@@ -14,17 +14,12 @@ func _ready():
 func _process(delta):
 	pass
 
-func movement_process():
+func movement_process(inputForce):
 	#input
-	var inputForce = Vector3()
-	inputForce.z = Input.get_axis("fore","aft")
-	inputForce.x = Input.get_axis("left","right")
-	inputForce.y = Input.get_axis("down","up")
-	inputForce = playerBody.basis * inputForce.normalized()
 	var roll = -Input.get_axis("roll_left","roll_right")*roll_sensitivity
-	
+	var rotationInputs = Vector3(mouse_delta.y*-mouse_y_sensitivity,mouse_delta.x*-mouse_x_sensitivity,roll)
 	playerBody.apply_central_force(inputForce * thrust_multiplier)
-	playerBody.apply_torque(playerBody.transform.basis * Vector3(mouse_delta.y*-mouse_y_sensitivity,mouse_delta.x*-mouse_x_sensitivity,roll))
+	playerBody.apply_torque(playerBody.transform.basis * rotationInputs)
 	playerBody.set_angular_damp(5)
 	#Braking Force
 	if inputForce == Vector3.ZERO && playerBody.linear_velocity.length()>1:
