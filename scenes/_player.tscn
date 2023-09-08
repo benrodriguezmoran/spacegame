@@ -105,7 +105,7 @@ spot_angle = 53.87
 
 [node name="walk_raycast" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.988223, 0)
-target_position = Vector3(0, -0.42, 0)
+target_position = Vector3(0, -1.375, 0)
 
 [node name="target_raycast" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, -500)

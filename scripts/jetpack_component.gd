@@ -19,7 +19,7 @@ func movement_process(inputForce):
 	var roll = -Input.get_axis("roll_left","roll_right")*roll_sensitivity
 	var rotationInputs = Vector3(mouse_delta.y*-mouse_y_sensitivity,mouse_delta.x*-mouse_x_sensitivity,roll)
 	playerBody.apply_central_force(inputForce * thrust_multiplier)
-	playerBody.apply_torque(playerBody.transform.basis * rotationInputs)
+	playerBody.apply_torque(playerBody.basis * rotationInputs)
 	playerBody.set_angular_damp(5)
 	#Braking Force
 	if inputForce == Vector3.ZERO && playerBody.linear_velocity.length()>1:
