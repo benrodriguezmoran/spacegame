@@ -1,6 +1,7 @@
 # spacegame
 ![badge](https://img.shields.io/badge/license-MIT-blue.svg)
-Godot powered realistic space experience, embark on a voyage set in the not so distant future where humanity has settled into the solar system in an expansion not too disimilar from the age of sail, however the challenges they player will face will be like none before.
+
+A Godot powered realistic space experience, embark on a voyage set in the not so distant future where humanity has settled into the solar system in an expansion not too disimilar from the age of sail, however the challenges they player will face will be like none before.
 ![screenshot](assets/images/screenshot.png)
 ## Table Of Contents
 - [Installation](#installation)
