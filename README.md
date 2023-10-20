@@ -21,7 +21,7 @@ To demo this "tech demo", you can clone this repository and use Godot v4.1.2 to 
  - [ESO/S. Brunier](https://www.eso.org/public/images/eso0932a/): Milky Way Panorama
 ## License 
 
-    Read more about [MIT Licensing](https://opensource.org/license/mit/)
+Read more about [MIT Licensing](https://opensource.org/license/mit/)
 
 ## Questions
 - Github [benrodriguezmoran](https://github.com/benrodriguezmoran) 
