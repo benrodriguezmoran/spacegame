@@ -19,7 +19,7 @@ func movement_process(inputVector):
 	var floorNormal = walk_raycast.get_collision_normal()
 	var floorPoint = walk_raycast.get_collision_point()
 	var walkInput = Vector3(inputVector.x, 0.0 ,inputVector.z)
-	var relativeVelocity = (player.linear_velocity - floor.linear_velocity) * player.basis
+	var relativeVelocity = (player.linear_velocity - floor.linear_velocity)
 	player.apply_central_force((walkInput * walkForce))
 	player.apply_force(Vector3(0.0,-magForce,0.0)*floorNormal.normalized(),walk_raycast.position * player.basis)
 	floor.apply_force(floorNormal.normalized()*magForce,floorPoint)
