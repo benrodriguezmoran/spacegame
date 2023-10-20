@@ -2,7 +2,7 @@ extends Node
 
 @onready var hotbar = $hotbar
 signal hotbar_selection(block_name)
-var hotbarSelection =  ["passage", "open", "wall", "door", "passage" ]
+var hotbarSelection =  ["passage", "open", "wall", "door", "passage", "drive_9m" ]
 #var dVconsumed = 0
 #var acceleration = 0
 #var last_vel = 0

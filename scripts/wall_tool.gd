@@ -10,10 +10,13 @@ func _ready():
 func check_ray(selectedTool:String):
 	if !rayCast.is_colliding():
 		return
-	
-
+	print(rayCast.get_collider())
+	if !rayCast.get_collider().get_parent().name == "passage_controller": return
+	var passage_controller = rayCast.get_collider().get_parent()
+	var wall = rayCast.get_collider()
 
 func _on_interaction_raycast_transitioned_state(state):
+	print(state)
 	if state == self:
 		rayCast.set_collision_mask_value(2, true)
 	else:

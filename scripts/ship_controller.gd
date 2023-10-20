@@ -23,6 +23,7 @@ var blockCategoriesDictionary = {
 
 
 func _ready():
+	self.set_meta("ship", true)
 	center_of_mass_mode = RigidBody3D.CENTER_OF_MASS_MODE_CUSTOM
 
 func _process(delta):

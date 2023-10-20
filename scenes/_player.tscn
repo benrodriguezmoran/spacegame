@@ -75,6 +75,8 @@ events = [SubResource("InputEventAction_5gn8l")]
 
 [node name="Player" type="RigidBody3D"]
 mass = 100.0
+max_contacts_reported = 1
+contact_monitor = true
 script = ExtResource("1_w4ci4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -101,12 +103,20 @@ spot_range = 321.672
 spot_attenuation = 1.36604
 spot_angle = 53.87
 
+[node name="walk_raycast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.988223, 0)
+target_position = Vector3(0, -1.375, 0)
+
+[node name="target_raycast" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -500)
+
 [node name="interaction_raycast" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.459441, 0)
-target_position = Vector3(0, -10.005, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.459441, 0)
+target_position = Vector3(0, 0, -12)
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
+debug_shape_thickness = 1
 script = ExtResource("2_32g0b")
 
 [node name="block_placement" type="Node" parent="interaction_raycast"]
@@ -236,6 +246,9 @@ offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("6_is5yq")
 
+[connection signal="body_entered" from="." to="movement_component/walkState" method="_on_player_body_entered"]
 [connection signal="transitioned_state" from="interaction_raycast" to="interaction_raycast/block_placement" method="_on_interaction_raycast_transitioned_state"]
 [connection signal="transitioned_state" from="interaction_raycast" to="interaction_raycast/wall_tool" method="_on_interaction_raycast_transitioned_state"]
+[connection signal="transitioned_state" from="movement_component" to="movement_component/jetpackState" method="_on_movement_component_transitioned_state"]
+[connection signal="transitioned_state" from="movement_component" to="movement_component/walkState" method="_on_movement_component_transitioned_state"]
 [connection signal="hotbar_selection" from="player_UI" to="interaction_raycast" method="_on_player_ui_hotbar_selection"]

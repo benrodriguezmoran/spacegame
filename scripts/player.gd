@@ -3,7 +3,7 @@ extends RigidBody3D
 
 
 func _ready():
-	pass
+	set_contact_monitor(true)
 
 func _process(_delta):
 	pass
