@@ -2,7 +2,7 @@ extends Node
 
 @onready var hotbar = $hotbar
 signal hotbar_selection(block_name)
-var hotbarSelection =  ["passage", "open", "wall", "door", "passage", "drive_9m" ]
+var hotbarSelection =  ["passage", "wall", "door", "thruster", "drive_9m" ]
 #var dVconsumed = 0
 #var acceleration = 0
 #var last_vel = 0
@@ -29,5 +29,3 @@ func _input(event):
 func on_hotbar_pressed(slot):
 	if slot < hotbarSelection.size():
 		hotbar_selection.emit(hotbarSelection[slot])
-
-

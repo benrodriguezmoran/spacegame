@@ -1,5 +1,6 @@
 shader_type spatial;
 render_mode unshaded, cull_disabled, blend_mix;
+uniform sampler2D depth_texture : hint_depth_texture, repeat_disable, filter_nearest;
 uniform bool emission;
 uniform float emissionMulti : hint_range(0.0,100.0);
 uniform float alpha : hint_range(0.0,1.0) = 0.5;
@@ -20,6 +21,9 @@ void fragment() {
 	ALBEDO = texture(color, UV.yy).rgb;
 	if (emission == true)
 		EMISSION = texture(color, UV).rgb*emissionMulti;
+	float depth = textureLod(depth_texture, SCREEN_UV, 0.0).r;
+    vec4 upos = INV_PROJECTION_MATRIX * vec4(SCREEN_UV * 2.0 - 1.0, depth, 1.0);
+    vec3 pixel_position = upos.xyz / upos.w;
 }
 void vertex() {
 	VERTEX.y += (VERTEX.y+height) * (VERTEX.y+height) * clamp(acceleration + 0.5 * thrust, 0.01, 10.0);

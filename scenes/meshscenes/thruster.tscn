@@ -1,8 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://cn38py7a7chac"]
+[gd_scene load_steps=5 format=3 uid="uid://cn38py7a7chac"]
 
 [ext_resource type="ArrayMesh" uid="uid://i7qf1suavcr0" path="res://models/thruster.obj" id="1_ck8wp"]
+[ext_resource type="Material" uid="uid://di0cuxvfi2w5a" path="res://materials/hot.tres" id="2_vpcn8"]
+[ext_resource type="Material" uid="uid://5ah8gr3n6y2a" path="res://materials/metal.tres" id="3_ybvsa"]
+[ext_resource type="Material" uid="uid://cpm7pfm3w23gv" path="res://materials/metalL.tres" id="4_apkp7"]
 
 [node name="highlight" type="Node3D"]
 
 [node name="Thruster" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_ck8wp")
+surface_material_override/0 = ExtResource("2_vpcn8")
+surface_material_override/1 = ExtResource("3_ybvsa")
+surface_material_override/2 = ExtResource("3_ybvsa")
+surface_material_override/3 = ExtResource("3_ybvsa")
+surface_material_override/4 = ExtResource("4_apkp7")
+surface_material_override/5 = ExtResource("4_apkp7")
+surface_material_override/6 = ExtResource("4_apkp7")

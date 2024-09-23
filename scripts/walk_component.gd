@@ -18,11 +18,12 @@ func movement_process(inputVector):
 	floor = walk_raycast.get_collider()
 	var floorNormal = walk_raycast.get_collision_normal()
 	var floorPoint = walk_raycast.get_collision_point()
-	var walkInput = Vector3(inputVector.x, 0.0 ,inputVector.z)
+	var walkInput = Vector3(0.0,-magForce, 0.0)
 	var relativeVelocity = (player.linear_velocity - floor.linear_velocity)
-	player.apply_central_force((walkInput * walkForce))
-	player.apply_force(Vector3(0.0,-magForce,0.0)*floorNormal.normalized(),walk_raycast.position * player.basis)
-	floor.apply_force(floorNormal.normalized()*magForce,floorPoint)
+	player.apply_central_force((inputVector * walkForce)+walkInput)
+	#player.apply_force(Vector3(0.0,-magForce,0.0)*floorNormal,walk_raycast.position * player.basis)
+	#player.rotation = floorNormal
+	floor.apply_force(floorNormal*-magForce,floorPoint)
 #	var walkForce = clamp(relativeVelocity,-vecMaxSpeed,vecMaxSpeed)
 	print(floorPoint)
 #	player.apply_central_force(walkInput*5 - Vector3(walkForce.x,0,walkForce.y))
@@ -30,6 +31,3 @@ func movement_process(inputVector):
 
 func _on_movement_component_transitioned_state(state):
 	pass # Replace with function body.
-
-
-

@@ -1,7 +1,10 @@
-[gd_scene load_steps=32 format=3 uid="uid://coa11mnhy1ph8"]
+[gd_scene load_steps=43 format=3 uid="uid://coa11mnhy1ph8"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_w4ci4"]
+[ext_resource type="Environment" uid="uid://dckas8pn11ksi" path="res://environment.tres" id="2_5n1gv"]
 [ext_resource type="Script" path="res://scripts/interaction_cast.gd" id="2_32g0b"]
+[ext_resource type="Script" path="res://scripts/camera_zoom.gd" id="2_boukc"]
+[ext_resource type="Script" path="res://scripts/interact_ray.gd" id="2_cuqjk"]
 [ext_resource type="Script" path="res://scripts/block_placer.gd" id="2_w0s5i"]
 [ext_resource type="Script" path="res://scripts/fps.gd" id="3_6xag1"]
 [ext_resource type="Script" path="res://components/movement_component.gd" id="3_fifyd"]
@@ -10,6 +13,13 @@
 [ext_resource type="Script" path="res://scripts/wall_tool.gd" id="4_kxnjw"]
 [ext_resource type="Script" path="res://scripts/jetpack_component.gd" id="5_8qltw"]
 [ext_resource type="Script" path="res://scripts/debugUI.gd" id="6_is5yq"]
+[ext_resource type="PackedScene" uid="uid://fn5el1w1buv1" path="res://scenes/UI/localmap.tscn" id="12_i6r25"]
+[ext_resource type="Shader" path="res://shaders/crosshair.gdshader" id="13_53np8"]
+[ext_resource type="Shader" path="res://shaders/UI_3d_inv.gdshader" id="14_1hqb3"]
+[ext_resource type="Texture2D" uid="uid://bhlupsoped1ra" path="res://images/icons/crosshair.png" id="14_tkv2i"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qwn2s"]
+friction = 0.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_epsm5"]
 radial_segments = 14
@@ -73,10 +83,22 @@ action = &"hotbar_9"
 [sub_resource type="Shortcut" id="Shortcut_fb2mj"]
 events = [SubResource("InputEventAction_5gn8l")]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kamjp"]
+shader = ExtResource("14_1hqb3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ehwqm"]
+shader = ExtResource("13_53np8")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_a6loj"]
+diffuse_texture = ExtResource("14_tkv2i")
+normal_texture = ExtResource("14_tkv2i")
+specular_texture = ExtResource("14_tkv2i")
+
 [node name="Player" type="RigidBody3D"]
 mass = 100.0
-max_contacts_reported = 1
+physics_material_override = SubResource("PhysicsMaterial_qwn2s")
 contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_w4ci4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -88,29 +110,48 @@ shape = SubResource("CylinderShape3D_5t61o")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 0.476, -0.128418)
+environment = ExtResource("2_5n1gv")
 current = true
-fov = 90.0
+fov = 98.5
+far = 10000.0
+script = ExtResource("2_boukc")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.653888, 0)
-spot_range = 321.672
-spot_attenuation = 1.36604
-spot_angle = 53.87
+light_energy = 8.227
+light_indirect_energy = 2.6
+light_size = 0.263
+spot_range = 581.743
+spot_attenuation = 2.0
+spot_angle = 122.87
+spot_angle_attenuation = 0.901251
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.653888, 0)
-spot_range = 321.672
-spot_attenuation = 1.36604
-spot_angle = 53.87
+light_energy = 8.227
+light_indirect_energy = 2.6
+light_size = 0.263
+spot_range = 581.743
+spot_attenuation = 2.0
+spot_angle = 122.87
+spot_angle_attenuation = 0.901251
 
 [node name="walk_raycast" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.988223, 0)
 target_position = Vector3(0, -1.375, 0)
 
 [node name="target_raycast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.442426, 0)
 target_position = Vector3(0, 0, -500)
 
-[node name="interaction_raycast" type="RayCast3D" parent="."]
+[node name="interact_ray" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.516653, 0)
+target_position = Vector3(0, -5, 0)
+collision_mask = 4
+collide_with_areas = true
+script = ExtResource("2_cuqjk")
+
+[node name="builder_ray" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.459441, 0)
 target_position = Vector3(0, 0, -12)
 hit_from_inside = true
@@ -119,13 +160,13 @@ collide_with_bodies = false
 debug_shape_thickness = 1
 script = ExtResource("2_32g0b")
 
-[node name="block_placement" type="Node" parent="interaction_raycast"]
+[node name="block_placement" type="Node" parent="builder_ray"]
 script = ExtResource("2_w0s5i")
 
-[node name="wall_tool" type="Node" parent="interaction_raycast"]
+[node name="wall_tool" type="Node" parent="builder_ray"]
 script = ExtResource("4_kxnjw")
 
-[node name="prop_placement" type="Node" parent="interaction_raycast"]
+[node name="prop_placement" type="Node" parent="builder_ray"]
 
 [node name="movement_component" type="Node" parent="."]
 script = ExtResource("3_fifyd")
@@ -246,9 +287,48 @@ offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("6_is5yq")
 
+[node name="SubViewportContainer" type="SubViewportContainer" parent="player_UI"]
+material = SubResource("ShaderMaterial_kamjp")
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -145.0
+offset_right = 156.0
+grow_vertical = 0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="player_UI/SubViewportContainer"]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+msaa_3d = 2
+screen_space_aa = 1
+size = Vector2i(148, 145)
+render_target_update_mode = 4
+
+[node name="localmap" parent="player_UI/SubViewportContainer/SubViewport" instance=ExtResource("12_i6r25")]
+
+[node name="TextureRect" type="TextureRect" parent="player_UI"]
+material = SubResource("ShaderMaterial_ehwqm")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_a6loj")
+
 [connection signal="body_entered" from="." to="movement_component/walkState" method="_on_player_body_entered"]
-[connection signal="transitioned_state" from="interaction_raycast" to="interaction_raycast/block_placement" method="_on_interaction_raycast_transitioned_state"]
-[connection signal="transitioned_state" from="interaction_raycast" to="interaction_raycast/wall_tool" method="_on_interaction_raycast_transitioned_state"]
+[connection signal="transitioned_state" from="builder_ray" to="builder_ray/block_placement" method="_on_interaction_raycast_transitioned_state"]
+[connection signal="transitioned_state" from="builder_ray" to="builder_ray/wall_tool" method="_on_interaction_raycast_transitioned_state"]
 [connection signal="transitioned_state" from="movement_component" to="movement_component/jetpackState" method="_on_movement_component_transitioned_state"]
 [connection signal="transitioned_state" from="movement_component" to="movement_component/walkState" method="_on_movement_component_transitioned_state"]
-[connection signal="hotbar_selection" from="player_UI" to="interaction_raycast" method="_on_player_ui_hotbar_selection"]
+[connection signal="hotbar_selection" from="player_UI" to="builder_ray" method="_on_player_ui_hotbar_selection"]

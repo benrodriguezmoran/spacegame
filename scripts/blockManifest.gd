@@ -40,7 +40,7 @@ extends Node
 		"category":"passage",
 		}
 	}
-@export var tools = ["wall","open","door"]
+@export var tools = ["wall","door"]
 @export var props = {
 	"control_seat":{
 		"scene":preload("res://scenes/props/control_seat.tscn"),

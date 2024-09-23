@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://ciadqm8beqmxy"]
+[gd_scene load_steps=20 format=3 uid="uid://ciadqm8beqmxy"]
 
 [ext_resource type="PackedScene" uid="uid://cn38py7a7chac" path="res://scenes/meshscenes/thruster.tscn" id="1_4svbx"]
+[ext_resource type="Script" path="res://scripts/block.gd" id="1_rlsn8"]
 [ext_resource type="PackedScene" uid="uid://dkir43nfp5s8b" path="res://components/thrust_component.tscn" id="2_nbusw"]
 [ext_resource type="Shader" path="res://shaders/plume.gdshader" id="2_xnmss"]
 
@@ -41,7 +42,7 @@ shader = ExtResource("2_xnmss")
 shader_parameter/emission = false
 shader_parameter/emissionMulti = 0.87
 shader_parameter/alpha = 0.026
-shader_parameter/thrust = 1.0
+shader_parameter/thrust = 0.81
 shader_parameter/acceleration = 0.0
 shader_parameter/speed = 1.931
 shader_parameter/speed2 = 2.905
@@ -64,7 +65,7 @@ shader = ExtResource("2_xnmss")
 shader_parameter/emission = false
 shader_parameter/emissionMulti = 0.87
 shader_parameter/alpha = 0.063
-shader_parameter/thrust = 1.0
+shader_parameter/thrust = 0.33
 shader_parameter/acceleration = 0.0
 shader_parameter/speed = 4.786
 shader_parameter/speed2 = 8.672
@@ -88,7 +89,7 @@ shader = ExtResource("2_xnmss")
 shader_parameter/emission = false
 shader_parameter/emissionMulti = 0.87
 shader_parameter/alpha = 1.0
-shader_parameter/thrust = 0.645
+shader_parameter/thrust = 0.258
 shader_parameter/acceleration = 0.0
 shader_parameter/speed = 4.786
 shader_parameter/speed2 = 8.672
@@ -110,6 +111,7 @@ radius = 3.9
 height = 26.638
 
 [node name="thruster" type="Area3D"]
+script = ExtResource("1_rlsn8")
 
 [node name="BoundingBox" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_2topc")
@@ -139,3 +141,5 @@ skeleton = NodePath("../..")
 [node name="ShapeCast3D" type="ShapeCast3D" parent="thrust_component"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.7057, 0)
 shape = SubResource("CapsuleShape3D_vswuj")
+
+[connection signal="type_set" from="." to="thrust_component" method="_on_thruster_type_set"]

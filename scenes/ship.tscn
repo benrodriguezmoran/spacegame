@@ -6,3 +6,5 @@
 script = ExtResource("1_laxmr")
 
 [node name="ship_input_handler" type="Node" parent="."]
+
+[node name="ship_thrust_controller" type="Node" parent="."]
