@@ -1,6 +1,6 @@
 extends Label
 @onready var player = $"../.."
-@onready var placer = $"../../interaction_raycast/block_placement"
+@onready var placer = $"../../builder_ray/block_placement"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

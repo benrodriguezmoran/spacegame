@@ -38,6 +38,7 @@ noise = SubResource("FastNoiseLite_gjmbr")
 render_priority = 0
 shader = ExtResource("2_4udhl")
 shader_parameter/emission = null
+shader_parameter/emissionMulti = null
 shader_parameter/alpha = 0.254
 shader_parameter/thrust = 1.0
 shader_parameter/acceleration = 0.0

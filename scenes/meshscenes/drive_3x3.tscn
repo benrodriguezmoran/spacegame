@@ -1,9 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbcjptpuaxcet"]
+[gd_scene load_steps=7 format=3 uid="uid://cbcjptpuaxcet"]
 
 [ext_resource type="ArrayMesh" uid="uid://di61blebtj3ce" path="res://models/drive3x3x5.obj" id="1_5bnq8"]
+[ext_resource type="Material" uid="uid://di0cuxvfi2w5a" path="res://materials/hot.tres" id="2_lln6s"]
+[ext_resource type="Material" uid="uid://5ah8gr3n6y2a" path="res://materials/metal.tres" id="3_sg2ex"]
+[ext_resource type="Material" uid="uid://cpm7pfm3w23gv" path="res://materials/metalL.tres" id="4_j0ovv"]
+[ext_resource type="Material" uid="uid://bag2mo15hjqg" path="res://materials/metalC.tres" id="4_o4b8k"]
+[ext_resource type="Material" uid="uid://djmnif71n4i7w" path="res://materials/metalS.tres" id="5_1p27g"]
 
 [node name="highlight" type="Node3D"]
 
 [node name="mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -3, -9, -3)
 mesh = ExtResource("1_5bnq8")
+surface_material_override/0 = ExtResource("2_lln6s")
+surface_material_override/1 = ExtResource("3_sg2ex")
+surface_material_override/2 = ExtResource("4_o4b8k")
+surface_material_override/3 = ExtResource("4_o4b8k")
+surface_material_override/4 = ExtResource("4_o4b8k")
+surface_material_override/5 = ExtResource("5_1p27g")
+surface_material_override/6 = ExtResource("5_1p27g")
+surface_material_override/7 = ExtResource("3_sg2ex")
+surface_material_override/8 = ExtResource("3_sg2ex")
+surface_material_override/9 = ExtResource("4_j0ovv")
+surface_material_override/10 = ExtResource("4_j0ovv")
+surface_material_override/11 = ExtResource("4_j0ovv")

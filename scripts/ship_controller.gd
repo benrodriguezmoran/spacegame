@@ -20,6 +20,7 @@ var blockCategoriesDictionary = {
 	"passage":passageDictionary,
 	"drive":driveDictionary
 }
+var ref = Vector3i.ZERO
 
 
 func _ready():
@@ -32,8 +33,7 @@ func _process(delta):
 func _physics_process(delta):
 	pass
 
-func preselect(target, normal:Vector3, rot:Quaternion, block_name:String):
-	var ref = Vector3i.ZERO
+func preselect(target, normal:Vector3, rot:Quaternion, block_name:String = "structure_block"):
 	if (target != null) && (normal != Vector3.ZERO) && (blocks.find_key(target) != null) && (lastSelectedBlock == block_name):
 		ref = Vector3(blocks.find_key(target))
 		selectedBlock = blockManifest.blocks[block_name]
@@ -49,24 +49,21 @@ func preselect(target, normal:Vector3, rot:Quaternion, block_name:String):
 		else:
 			highlight = selectedBlock.mesh.instantiate()
 			add_child(highlight)
+			$highlight.position = ref * gridSize
+			$highlight.rotation = rot.get_euler()
 	elif has_node("highlight"):
 		$highlight.queue_free()
 	lastSelectedBlock = block_name
 	return ref
 
 func addBlock(placePos:Vector3, rot:Quaternion, block_name:String):
-	if blocks.has(placePos):
-		return
+	if blocks.has(placePos): return
 	var newBlockRef = blockManifest.blocks[block_name]
 	var newBlock = newBlockRef.scene.instantiate()
-	newBlock.set_script(load("res://scripts/block.gd"))
 	var tempBlocks = {}
+	newBlock.set_script(load("res://scripts/block.gd"))
 	newBlock.set_type(block_name, self)
-
 	var newBlockDictionary = newBlock.get_subblocks()
-	add_child(newBlock)
-	newBlock.position = placePos * gridSize
-	newBlock.rotation = rot.get_euler()
 	for blockSize in newBlockDictionary:
 		var checkPos = round(placePos + (rot * blockSize))
 		if blocks.has(checkPos):
@@ -77,6 +74,9 @@ func addBlock(placePos:Vector3, rot:Quaternion, block_name:String):
 		tempBlocks[checkPos] = newBlockDictionary[blockSize]
 	for pos in tempBlocks:
 		add_unique_block(pos, tempBlocks.get(pos))
+	add_child(newBlock)
+	newBlock.position = placePos * gridSize
+	newBlock.rotation = rot.get_euler()
 	blocks.merge(tempBlocks)
 	tempBlocks.clear()
 	emit_signal("block_added", placePos)
@@ -123,7 +123,7 @@ func update_structure():
 	#Recursive Depth First Search, get_neighbor for each neighbor until all is checked or disconituity is found, 
 	#then group separated sections 
 	var recursive = func(pos, recursive, connectionArray:Array):
-	#Position, external scope passed self reference, array to add poistions to
+	#Position, external scope passed self reference, array to add positions to
 		if !checked.has(pos):
 			checked.append(pos)
 			connectionArray.append(pos)
@@ -175,10 +175,12 @@ func new_ship_from_blocks(broken:Array):
 		newShip.add_unique_block(newShipDictionary.find_key(block), block)
 	newShip.blocks = newShipDictionary
 	newShip.update_mass()
+	var old_com = center_of_mass
 	self.update_mass()
-	newShip.set_axis_velocity(self.linear_velocity)
+	newShip.set_axis_velocity(self.linear_velocity+((old_com-newShip.center_of_mass)*basis)) ##TODO: Add outward angular velocity
+	set_axis_velocity(linear_velocity+((old_com-center_of_mass)*basis))
 	newShip.angular_velocity = self.angular_velocity
-
+	
 func get_neighbors(blockpos, workingDictionary:Dictionary=blocks):
 	var neighbors = []
 	for x in [-1,1]:
@@ -205,4 +207,3 @@ func add_unique_block(pos:Vector3, block_ref:Node):
 func remove_unique_block(pos:Vector3, block_ref:Node):
 	if block_ref.category in blockManifest.block_categories :
 		blockCategoriesDictionary[block_ref.category].erase(pos)
-

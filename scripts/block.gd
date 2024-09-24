@@ -4,9 +4,11 @@ var colliders = []
 var subblocks = {}
 var mass = 0
 var type 
+var isMainMultiblock = true
 var category
 var parentShip 
 signal type_set
+signal on_remove
 func _init():
 	self.set_meta("block", true)
 
@@ -29,6 +31,7 @@ func set_type(block_name, parent:Node):
 			child.set_script(load("res://scripts/block.gd"))
 			child.type = block_name
 			child.mass = blockManifest.blocks[block_name]["mass"]
+			child.isMainMultiblock = false
 			child.parentShip = parent
 			child.category = blockManifest.blocks[block_name]["category"]
 			child.reparent.call_deferred(parent)
@@ -50,7 +53,9 @@ func get_subblocks():
 	return subblocks
 
 func remove():
+	emit_signal("on_remove")
 	for collider in colliders:
 		collider.queue_free()
+	for subblock in subblocks:
+		subblocks[subblock].queue_free()
 	self.queue_free()
-

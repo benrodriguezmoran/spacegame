@@ -32,7 +32,7 @@ func check_ray(selectedBlock:String):	#placement raycast, calls target ship cont
 	if selectedBlock == null: return
 	if !rayCast.is_colliding():
 		if lastTargetShip != null:
-			lastTargetShip.preselect(null, Vector3.ZERO, placeRotation, "structure_block")
+			lastTargetShip.preselect(null, Vector3.ZERO, placeRotation)
 			placeTarget = null
 			placeNormal = Vector3.ZERO
 			lastTargetShip = null

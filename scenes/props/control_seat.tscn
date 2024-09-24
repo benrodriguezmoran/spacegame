@@ -6,6 +6,7 @@
 size = Vector3(1.24121, 1.60184, 0.825326)
 
 [node name="control_seat" type="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.59303, 0)
 
 [node name="control_seat" parent="." instance=ExtResource("1_wahnr")]
 
