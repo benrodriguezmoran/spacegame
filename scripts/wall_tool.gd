@@ -10,15 +10,17 @@ func _ready():
 func check_ray(selectedTool:String):
 	if !rayCast.is_colliding():
 		return
-	
+	var doorBool = false
+	if selectedTool == "door":
+		doorBool = true
 	if !rayCast.get_collider().get_parent().name == "passage_controller": return
 	var passage_controller = rayCast.get_collider().get_parent()
 	var wall = rayCast.get_collider()
 	print(wall)
 	if Input.is_action_just_pressed("left_click") and passage_controller and wall != null:
-		passage_controller.update_walls(false,wall)
+		passage_controller.update_walls(false,wall,doorBool)
 	if Input.is_action_just_pressed("right_click") and passage_controller and wall != null:
-		passage_controller.update_walls(true,wall)
+		passage_controller.update_walls(true,wall,doorBool)
 		
 func _on_interaction_raycast_transitioned_state(state):
 	print(state)

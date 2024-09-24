@@ -73,7 +73,7 @@ func update_walls(checkState:bool=false,selectedWall:Node=null,placeDoor=false):
 		var neighborPassage = neighborBlock.get_node("passage_controller")
 		neighborPassage.toggle_wall(-blockRelative,checkState)
 
-func toggle_wall(blockRelative,checkState:bool=false):
+func toggle_wall(blockRelative,checkState:bool=false,placeDoor=false):
 	var checkDirection = direction[blockRelative]
 	colliders[checkDirection].disabled = !checkState
 	walls[checkDirection].visible = checkState

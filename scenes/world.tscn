@@ -57,10 +57,9 @@ rotation_edit_mode = 1
 [node name="ship" parent="frame" instance=ExtResource("8_aicjf")]
 transform = Transform3D(1, 0, 0, 0, -0.119565, -0.992826, 0, 0.992826, -0.119565, -0.342268, 3.79498, -13.544)
 
-[node name="door_controller" parent="frame" instance=ExtResource("6_erdxv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.76869, 0, -3.67325)
+[node name="RigidBody3D" type="RigidBody3D" parent="frame"]
 
-[node name="door_controller2" parent="frame" instance=ExtResource("6_erdxv")]
+[node name="door_controller2" parent="frame/RigidBody3D" instance=ExtResource("6_erdxv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.426205, 0, -3.67325)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

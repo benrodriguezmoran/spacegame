@@ -49,6 +49,8 @@ func preselect(target, normal:Vector3, rot:Quaternion, block_name:String = "stru
 		else:
 			highlight = selectedBlock.mesh.instantiate()
 			add_child(highlight)
+			$highlight.position = ref * gridSize
+			$highlight.rotation = rot.get_euler()
 	elif has_node("highlight"):
 		$highlight.queue_free()
 	lastSelectedBlock = block_name
