@@ -96,9 +96,8 @@ func toggle_wall(blockRelative,state:bool=false,placeDoor=false, placeRotation=P
 			doors[door] = checkDirection
 			door.position = walls[checkDirection].position
 			var temp = blockRelative.z
-			blockRelative.z = blockRelative.x * abs(temp)
-			blockRelative.x = temp 
-			door.rotation =   walls[checkDirection].rotation + (blockRelative * placeRotation)
+			
+			door.basis =   walls[checkDirection].basis.rotated(blockRelative,placeRotation)
 			uiLog.p2 = str(blockRelative * placeRotation)
 			uiLog.p3 = str(door.rotation)
 			return door
