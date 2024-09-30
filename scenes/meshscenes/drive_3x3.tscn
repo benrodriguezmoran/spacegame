@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cbcjptpuaxcet"]
+[gd_scene load_steps=8 format=3 uid="uid://cbcjptpuaxcet"]
 
 [ext_resource type="ArrayMesh" uid="uid://di61blebtj3ce" path="res://models/drive3x3x5.obj" id="1_5bnq8"]
 [ext_resource type="Material" uid="uid://di0cuxvfi2w5a" path="res://materials/hot.tres" id="2_lln6s"]
@@ -6,6 +6,9 @@
 [ext_resource type="Material" uid="uid://cpm7pfm3w23gv" path="res://materials/metalL.tres" id="4_j0ovv"]
 [ext_resource type="Material" uid="uid://bag2mo15hjqg" path="res://materials/metalC.tres" id="4_o4b8k"]
 [ext_resource type="Material" uid="uid://djmnif71n4i7w" path="res://materials/metalS.tres" id="5_1p27g"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ytsrw"]
+size = Vector3(8, 164, 8)
 
 [node name="highlight" type="Node3D"]
 
@@ -24,3 +27,12 @@ surface_material_override/8 = ExtResource("3_sg2ex")
 surface_material_override/9 = ExtResource("4_j0ovv")
 surface_material_override/10 = ExtResource("4_j0ovv")
 surface_material_override/11 = ExtResource("4_j0ovv")
+
+[node name="occluder" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3)
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="occluder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -80.5, 0)
+shape = SubResource("BoxShape3D_ytsrw")

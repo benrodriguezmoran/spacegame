@@ -6,6 +6,7 @@ extends RayCast3D
 
 var selectedTool:String
 signal transitioned_state(state)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -14,7 +15,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if current_state != null:
+	if current_state:
 		current_state.check_ray(selectedTool)
 	
 func _on_player_ui_hotbar_selection(toolName):

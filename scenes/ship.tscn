@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bmsull6uwti7j"]
 
-[ext_resource type="Script" path="res://scripts/ship_controller.gd" id="1_laxmr"]
+[ext_resource type="Script" path="res://scripts/ship/ship_controller.gd" id="1_laxmr"]
 
 [node name="ship" type="RigidBody3D"]
 script = ExtResource("1_laxmr")

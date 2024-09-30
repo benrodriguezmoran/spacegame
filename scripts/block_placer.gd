@@ -28,7 +28,6 @@ func check_ray(selectedBlock:String):	#placement raycast, calls target ship cont
 		placeRotation *= Quaternion(Vector3(0,1,0), PI/2)
 	if Input.is_action_just_pressed("flipZ-"):
 		placeRotation *= Quaternion(Vector3(0,1,0), -PI/2)
-
 	if selectedBlock == null: return
 	if !rayCast.is_colliding():
 		if lastTargetShip != null:

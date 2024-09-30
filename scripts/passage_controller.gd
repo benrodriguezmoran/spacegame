@@ -1,6 +1,7 @@
 extends Node3D
 @export var colliders = []
 @export var walls = []
+const DOOR_CONTROLLER = preload("res://scenes/parts/door_controller.tscn")
 var block 
 enum enumDirection {FORE,BACK,LEFT,RIGHT,UP,DOWN}
 var direction = {
@@ -14,6 +15,7 @@ var direction = {
 var wallInteractors = []
 var wallVectors = {}
 var neighbors = []
+var doors = {}
 var props = {} ## Node
 var blockPos
 # Called when the node enters the scene tree for the first time.
@@ -44,28 +46,32 @@ func _on_block_added(placePos):
 	block.rotation = Vector3(0,0,0)
 	update_walls()
 
-func update_walls(checkState:bool=false,selectedWall:Node=null,placeDoor=false):
+func update_walls(checkState:bool=false,selectedWall:Node=null,placeDoor=false,placeRotation=0):
 	neighbors = block.parentShip.get_neighbors(blockPos, block.parentShip.passageDictionary)
+	
 	if selectedWall:
 		var selectedWallDirection = wallVectors.get(selectedWall)
 		
 		var singleNeighbor = blockPos - selectedWallDirection
 		
-		if (singleNeighbor) in neighbors or placeDoor:
-			toggle_wall(selectedWallDirection,checkState)
+		if (singleNeighbor in neighbors) or placeDoor:
+			var doorRef = toggle_wall(selectedWallDirection,checkState,placeDoor,placeRotation)
 			if !block.parentShip.blocks.get(singleNeighbor): 
 				return
-			if (singleNeighbor) in neighbors:
+			if singleNeighbor in neighbors:
 				var neighborBlock = block.parentShip.blocks.get(singleNeighbor)
 				var neighborPassage = neighborBlock.get_node("passage_controller")
-				neighborPassage.toggle_wall(-selectedWallDirection,checkState)
+				neighborPassage.toggle_wall(-selectedWallDirection,checkState,placeDoor,placeRotation,doorRef)
+			return
 		else:
 			print("cannot replace exterior wall")
 		return
+		
+		
 	for neighborPos in neighbors:
 		var blockRelative = blockPos - neighborPos
 		if (blockRelative not in direction): return
-		toggle_wall(blockRelative)
+		toggle_wall(blockRelative,checkState)
 
 		if !block.parentShip.blocks.get(neighborPos): 
 			return
@@ -73,10 +79,41 @@ func update_walls(checkState:bool=false,selectedWall:Node=null,placeDoor=false):
 		var neighborPassage = neighborBlock.get_node("passage_controller")
 		neighborPassage.toggle_wall(-blockRelative,checkState)
 
-func toggle_wall(blockRelative,checkState:bool=false,placeDoor=false):
+func toggle_wall(blockRelative,state:bool=false,placeDoor=false, placeRotation=PI/2, doorRef:Node=null):
 	var checkDirection = direction[blockRelative]
-	colliders[checkDirection].disabled = !checkState
-	walls[checkDirection].visible = checkState
+	if placeDoor:
+		var door
+		if !state:
+			colliders[checkDirection].disabled = !state
+			walls[checkDirection].visible = state
+			if doors.find_key(checkDirection): return
+			if doorRef != null: 
+				print("doorRef")
+				doors[doorRef] = walls[checkDirection]
+				return  
+			door = DOOR_CONTROLLER.instantiate()
+			add_child(door)
+			doors[door] = checkDirection
+			door.position = walls[checkDirection].position
+			var temp = blockRelative.z
+			blockRelative.z = blockRelative.x * abs(temp)
+			blockRelative.x = temp 
+			door.rotation =   walls[checkDirection].rotation + (blockRelative * placeRotation)
+			uiLog.p2 = str(blockRelative * placeRotation)
+			uiLog.p3 = str(door.rotation)
+			return door
+		else:
+			var trash = doors.find_key(checkDirection)
+			doors.erase(trash)
+			colliders[checkDirection].disabled = !state
+			walls[checkDirection].visible = state
+			if !trash: return
+			trash.remove()
+	else:
+		colliders[checkDirection].disabled = !state
+		walls[checkDirection].visible = state
 
 func _on_passage_on_remove() -> void:
+	for door in doors:
+		door.remove()
 	update_walls(true)

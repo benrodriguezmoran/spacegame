@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://cnuxdi41yf33x"]
+[gd_scene load_steps=12 format=4 uid="uid://cnuxdi41yf33x"]
 
-[ext_resource type="Script" path="res://scripts/block.gd" id="1_aljjr"]
+[ext_resource type="Script" path="res://scripts/ship/block.gd" id="1_aljjr"]
 [ext_resource type="Script" path="res://scripts/passage_controller.gd" id="2_c2vk1"]
 [ext_resource type="Material" uid="uid://5ah8gr3n6y2a" path="res://materials/metal.tres" id="3_5jur5"]
+[ext_resource type="Material" uid="uid://di0cuxvfi2w5a" path="res://materials/hot.tres" id="3_ghi4h"]
+[ext_resource type="Material" uid="uid://bag2mo15hjqg" path="res://materials/metalC.tres" id="5_6f4yd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gg6x5"]
 size = Vector3(3, 3, 3)
@@ -43,6 +45,9 @@ _surfaces = [{
 "vertex_data": PackedByteArray("zcysv2Zmtr/NzKw/Zma2v2Zmtr9mZrY/zcysv2Zmtr/NzKy/Zma2v2Zmtr9mZra/zcysP2Zmtr/NzKy/Zma2P2Zmtr9mZra/zcysP2Zmtr/NzKw/Zma2P2Zmtr9mZrY/zcysv2Zmtr/NzKw/Zma2v2Zmtr9mZrY/SQ9HPwAAwL9JD0e/SQ9HvwAAwL9JD0e/SQ9HPwAAwL9JD0c/SQ9HvwAAwL9JD0c/zcysv2Zmtr/NzKy/zcysv2Zmtr/NzKw/ya+TvwAAwL/Jr5M/ya+TvwAAwL/Jr5O/AADAvwAAwL8AAMA/AADAvwAAwL8AAMC/ya+TPwAAwL/Jr5O/AADAPwAAwL8AAMC/ya+TPwAAwL/Jr5M/AADAPwAAwL8AAMA/fEJav3sUvr9YGz8/fEJav3sUvr9YGz+/LxaKv3sUvr86BXk/LxaKv3sUvr86BXm/WBs/v3sUvr98Qlq/WBs/P3sUvr98Qlq/OgV5v3sUvr8vFoq/OgV5P3sUvr8vFoq/fEJaP3sUvr9YGz+/fEJaP3sUvr9YGz8/LxaKP3sUvr86BXm/LxaKP3sUvr86BXk/WBs/P3sUvr98Qlo/WBs/v3sUvr98Qlo/OgV5P3sUvr8vFoo/OgV5v3sUvr8vFoo/OgV5P3sUvr8vFoo/OgV5v3sUvr8vFoo/ya+TPwAAwL/Jr5M/ya+TvwAAwL/Jr5M/WBs/v3sUvr98Qlo/WBs/P3sUvr98Qlo/SQ9HvwAAwL9JD0c/SQ9HPwAAwL9JD0c/OgV5v3sUvr8vFoo/WBs/v3sUvr98Qlo/ya+TvwAAwL/Jr5M/SQ9HvwAAwL9JD0c/WBs/P3sUvr98Qlo/OgV5P3sUvr8vFoo/SQ9HPwAAwL9JD0c/ya+TPwAAwL/Jr5M/LxaKv3sUvr86BXk/LxaKv3sUvr86BXm/ya+TvwAAwL/Jr5M/ya+TvwAAwL/Jr5O/fEJav3sUvr9YGz+/fEJav3sUvr9YGz8/SQ9HvwAAwL9JD0e/SQ9HvwAAwL9JD0c/LxaKv3sUvr86BXm/fEJav3sUvr9YGz+/ya+TvwAAwL/Jr5O/SQ9HvwAAwL9JD0e/fEJav3sUvr9YGz8/LxaKv3sUvr86BXk/SQ9HvwAAwL9JD0c/ya+TvwAAwL/Jr5M/OgV5v3sUvr8vFoq/OgV5P3sUvr8vFoq/ya+TvwAAwL/Jr5O/ya+TPwAAwL/Jr5O/WBs/P3sUvr98Qlq/WBs/v3sUvr98Qlq/SQ9HPwAAwL9JD0e/SQ9HvwAAwL9JD0e/WBs/v3sUvr98Qlq/OgV5v3sUvr8vFoq/SQ9HvwAAwL9JD0e/ya+TvwAAwL/Jr5O/OgV5P3sUvr8vFoq/WBs/P3sUvr98Qlq/ya+TPwAAwL/Jr5O/SQ9HPwAAwL9JD0e/LxaKP3sUvr86BXm/LxaKP3sUvr86BXk/ya+TPwAAwL/Jr5O/ya+TPwAAwL/Jr5M/fEJaP3sUvr9YGz8/fEJaP3sUvr9YGz+/SQ9HPwAAwL9JD0c/SQ9HPwAAwL9JD0e/fEJaP3sUvr9YGz+/LxaKP3sUvr86BXm/SQ9HPwAAwL9JD0e/ya+TPwAAwL/Jr5O/LxaKP3sUvr86BXk/fEJaP3sUvr9YGz8/ya+TPwAAwL/Jr5M/SQ9HPwAAwL9JD0c/Zma2P2Zmtr9mZrY/AADAPwAAwL8AAMA/Zma2v2Zmtr9mZrY/AADAvwAAwL8AAMA/Zma2P2Zmtr9mZra/AADAPwAAwL8AAMC/Zma2P2Zmtr9mZrY/AADAPwAAwL8AAMA/Zma2v2Zmtr9mZra/AADAvwAAwL8AAMC/Zma2P2Zmtr9mZra/AADAPwAAwL8AAMC/Zma2v2Zmtr9mZrY/AADAvwAAwL8AAMA/Zma2v2Zmtr9mZra/AADAvwAAwL8AAMC//3///////9//f//////b3v9///9dwP+//3///+C+/7//f///CDT/v/9////gPv+//3///wAAt9n/f///AACO4P9//////17g/3///////9//fwAA////v/9/AAD///+//38AAP///7//fwAA////v/9///8AAP+//3///wAA/7//fwAA/v//v/9/AAD///+//38AAP7//7//fwAA////v/9/AAD+//+//38AAP7//7//fwAA////v/9/AAD///+//38AAP///7//fwAA/v//v/9/AAD///+//38AAP7//7//fwAA////v/9/AAD///+//38AAP///7//fwAA////v/9/AAD///+//38AAP7//7//fwAA////v/9/AAD+//+//38AAP///7//fwAA////v/9/AAD///+//38AAP///79UlQAA////v1SVAAD///+/VJUAAP///79UlQAA////v/9/VBX///+//39UFf///7//f1QV////v/9/VBX///+/HI45HCLw7cccjjkcIvDtxxyOORwi8O3HHI45HCLw7cficTkcIvARuOJxORwi8BG44nE5HCLwEbjicTkcIvARuFSVVBWp6qnKVJVUFarqqcpUlVQVqeqpylSVVBWq6qnKqmpUFanqVLWqalQVqupUtapqVBWp6lS1qmpUFarqVLXicTkcIfARuOJxORwi8BG44nE5HCHwEbjicTkcIvARuMVjHA4i8BC4xWMcDiLwELjFYxwOIvAQuMVjHA4i8BC4/39UFf///7//f1QV////v/9/VBX///+//39UFf///79UlQAA////v1SVAAD///+/VJUAAP///79UlQAA////vzmcHA4i8O3HOZwcDiLw7cc5nBwOIvDtxzmcHA4i8O3HxWMcDiLwEbjFYxwOIvAQuMVjHA4i8BG4xWMcDiLwELiqalQVqepUtapqVBWq6lS1qmpUFanqVLWqalQVqupUtVSVVBWp6qnKVJVUFarqqcpUlVQVqeqpylSVVBWq6qnKHI45HCLw7cccjjkcIvDtxxyOORwi8O3HHI45HCLw7cc5nBwOIfDtxzmcHA4i8O3HOZwcDiHw7cc5nBwOIvDtx/9//7+qKqnq/3//v8Urxev/f/+/2tQj6/9//79U1anq/7//v1RVVNX/v/+/OVTi1f+//78kK2zq/7//v6oqqer/v///qqpU1f+///9zqOLV/7///0lWkdX/v///VFVU1f8//79U1anq/z//vznUHOr/P/+/JKuR1f8//7+qqlTV")
 }]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_mns8q"]
+size = Vector3(2, 2, 2)
+
 [node name="passage" type="Area3D"]
 script = ExtResource("1_aljjr")
 
@@ -50,7 +55,7 @@ script = ExtResource("1_aljjr")
 shape = SubResource("BoxShape3D_gg6x5")
 
 [node name="passageWall" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.00148229, 0.999999, 0.000579221, -0.999999, 0.00148248, -0.000318652, -0.000319507, -0.00057875, 1, -1.45, 0, 0)
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -1.45, 0, 0)
 shape = SubResource("BoxShape3D_wmj62")
 
 [node name="passageWall2" type="CollisionShape3D" parent="."]
@@ -126,33 +131,47 @@ shape = SubResource("BoxShape3D_wmj62")
 
 [node name="Plate" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-material_override = ExtResource("3_5jur5")
+material_override = ExtResource("3_ghi4h")
+gi_mode = 2
 mesh = SubResource("ArrayMesh_m8iwd")
 
 [node name="Plate2" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-material_override = ExtResource("3_5jur5")
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0, 0, 0)
+material_override = ExtResource("3_ghi4h")
+gi_mode = 2
 mesh = SubResource("ArrayMesh_m8iwd")
 
 [node name="Plate3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 0, 0, 0)
 material_override = ExtResource("3_5jur5")
+gi_mode = 2
 mesh = SubResource("ArrayMesh_m8iwd")
 
 [node name="Plate4" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0, 0)
 material_override = ExtResource("3_5jur5")
+gi_mode = 2
 mesh = SubResource("ArrayMesh_m8iwd")
 
 [node name="Plate5" type="MeshInstance3D" parent="."]
-transform = Transform3D(-9.55343e-15, -1.31134e-07, -1, 8.74228e-08, 1, -1.31134e-07, 1, -8.74228e-08, 1.91069e-15, 0, 0, 0)
-material_override = ExtResource("3_5jur5")
+material_override = ExtResource("5_6f4yd")
+gi_mode = 2
 mesh = SubResource("ArrayMesh_m8iwd")
 
 [node name="Plate6" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.33748e-14, 4.37114e-08, -1, -1.74846e-07, -1, -4.37114e-08, -1, 1.74846e-07, -5.73206e-15, 0, 0, 0)
-material_override = ExtResource("3_5jur5")
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
+material_override = ExtResource("5_6f4yd")
+gi_mode = 2
 mesh = SubResource("ArrayMesh_m8iwd")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="occluder" type="Area3D" parent="Node3D"]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/occluder"]
+shape = SubResource("BoxShape3D_mns8q")
 
 [connection signal="on_remove" from="." to="passage_controller" method="_on_passage_on_remove"]
 [connection signal="type_set" from="." to="passage_controller" method="_on_passage_type_set"]

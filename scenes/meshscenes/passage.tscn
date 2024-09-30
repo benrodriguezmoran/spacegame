@@ -1,7 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://lr0natqyhuwv"]
+[gd_scene load_steps=3 format=3 uid="uid://lr0natqyhuwv"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_q2i1g"]
 size = Vector3(3, 3, 3)
 
-[node name="highlight" type="MeshInstance3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_32vae"]
+size = Vector3(2, 2, 2)
+
+[node name="highlight" type="Node3D"]
+
+[node name="Passage" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_q2i1g")
+
+[node name="occluder" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="occluder"]
+shape = SubResource("BoxShape3D_32vae")

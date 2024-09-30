@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6n20q36aalrm"]
+[gd_scene load_steps=6 format=3 uid="uid://b6n20q36aalrm"]
 
 [ext_resource type="ArrayMesh" uid="uid://ceahyaekxw87n" path="res://models/thruster5.obj" id="1_yr8xg"]
 [ext_resource type="Material" uid="uid://di0cuxvfi2w5a" path="res://materials/hot.tres" id="2_x4dl7"]
 [ext_resource type="Material" uid="uid://5ah8gr3n6y2a" path="res://materials/metal.tres" id="3_mkwil"]
 [ext_resource type="Material" uid="uid://cpm7pfm3w23gv" path="res://materials/metalL.tres" id="4_0n4tq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k04yb"]
+size = Vector3(3, 3, 3)
 
 [node name="highlight" type="Node3D"]
 
@@ -18,3 +21,10 @@ surface_material_override/5 = ExtResource("2_x4dl7")
 surface_material_override/6 = ExtResource("4_0n4tq")
 surface_material_override/7 = ExtResource("4_0n4tq")
 surface_material_override/8 = ExtResource("4_0n4tq")
+
+[node name="occluder" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="occluder"]
+shape = SubResource("BoxShape3D_k04yb")

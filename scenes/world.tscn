@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dla6rwishj5vb"]
+[gd_scene load_steps=7 format=3 uid="uid://dla6rwishj5vb"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_nrpeo"]
 [ext_resource type="Script" path="res://scripts/UI_controller.gd" id="2_pbsoq"]
 [ext_resource type="Environment" uid="uid://dckas8pn11ksi" path="res://environment.tres" id="3_d7swh"]
 [ext_resource type="PackedScene" uid="uid://coa11mnhy1ph8" path="res://scenes/_player.tscn" id="3_vrwyv"]
-[ext_resource type="PackedScene" uid="uid://6ucxxes3qp6o" path="res://scenes/parts/door_controller.tscn" id="6_erdxv"]
 [ext_resource type="PackedScene" uid="uid://bmsull6uwti7j" path="res://scenes/ship.tscn" id="8_aicjf"]
 
 [sub_resource type="World3D" id="World3D_qwyru"]
@@ -55,12 +54,7 @@ far = 16384.0
 rotation_edit_mode = 1
 
 [node name="ship" parent="frame" instance=ExtResource("8_aicjf")]
-transform = Transform3D(1, 0, 0, 0, -0.119565, -0.992826, 0, 0.992826, -0.119565, -0.342268, 3.79498, -13.544)
-
-[node name="RigidBody3D" type="RigidBody3D" parent="frame"]
-
-[node name="door_controller2" parent="frame/RigidBody3D" instance=ExtResource("6_erdxv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.426205, 0, -3.67325)
+transform = Transform3D(1, 0, 0, 0, -0.119565, -0.992826, 0, 0.992826, -0.119565, -0.342268, 1.07088, -5.23784)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("3_d7swh")

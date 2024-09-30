@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://coa11mnhy1ph8"]
+[gd_scene load_steps=46 format=3 uid="uid://coa11mnhy1ph8"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_w4ci4"]
 [ext_resource type="Environment" uid="uid://dckas8pn11ksi" path="res://environment.tres" id="2_5n1gv"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scripts/jetpack_component.gd" id="5_8qltw"]
 [ext_resource type="Script" path="res://scripts/debugUI.gd" id="6_is5yq"]
 [ext_resource type="PackedScene" uid="uid://fn5el1w1buv1" path="res://scenes/UI/localmap.tscn" id="12_i6r25"]
+[ext_resource type="Shader" path="res://shaders/UI_inv.gdshader" id="12_q5rsa"]
 [ext_resource type="Shader" path="res://shaders/crosshair.gdshader" id="13_53np8"]
 [ext_resource type="Shader" path="res://shaders/UI_3d_inv.gdshader" id="14_1hqb3"]
 [ext_resource type="Texture2D" uid="uid://bhlupsoped1ra" path="res://images/icons/crosshair.png" id="14_tkv2i"]
@@ -82,6 +83,12 @@ action = &"hotbar_9"
 
 [sub_resource type="Shortcut" id="Shortcut_fb2mj"]
 events = [SubResource("InputEventAction_5gn8l")]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vfso1"]
+shader = ExtResource("12_q5rsa")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n2cho"]
+shader = ExtResource("12_q5rsa")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kamjp"]
 shader = ExtResource("14_1hqb3")
@@ -272,6 +279,7 @@ icon = SubResource("PlaceholderTexture2D_5axd0")
 icon_alignment = 1
 
 [node name="FPS" type="Label" parent="player_UI"]
+material = SubResource("ShaderMaterial_vfso1")
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -279,9 +287,11 @@ anchor_right = 1.0
 offset_left = -40.0
 offset_bottom = 23.0
 grow_horizontal = 0
+text = "PLACEHOLDER"
 script = ExtResource("3_6xag1")
 
 [node name="DEBUG" type="Label" parent="player_UI"]
+material = SubResource("ShaderMaterial_n2cho")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
