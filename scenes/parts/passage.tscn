@@ -1,10 +1,8 @@
-[gd_scene load_steps=12 format=4 uid="uid://cnuxdi41yf33x"]
+[gd_scene load_steps=10 format=4 uid="uid://cnuxdi41yf33x"]
 
 [ext_resource type="Script" path="res://scripts/ship/block.gd" id="1_aljjr"]
 [ext_resource type="Script" path="res://scripts/passage_controller.gd" id="2_c2vk1"]
-[ext_resource type="Material" uid="uid://5ah8gr3n6y2a" path="res://materials/metal.tres" id="3_5jur5"]
-[ext_resource type="Material" uid="uid://di0cuxvfi2w5a" path="res://materials/hot.tres" id="3_ghi4h"]
-[ext_resource type="Material" uid="uid://bag2mo15hjqg" path="res://materials/metalC.tres" id="5_6f4yd"]
+[ext_resource type="Material" uid="uid://cpm7pfm3w23gv" path="res://materials/metalL.tres" id="3_gm22r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gg6x5"]
 size = Vector3(3, 3, 3)
@@ -131,36 +129,36 @@ shape = SubResource("BoxShape3D_wmj62")
 
 [node name="Plate" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-material_override = ExtResource("3_ghi4h")
+material_override = ExtResource("3_gm22r")
 gi_mode = 2
 mesh = SubResource("ArrayMesh_m8iwd")
 
 [node name="Plate2" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0, 0, 0)
-material_override = ExtResource("3_ghi4h")
+material_override = ExtResource("3_gm22r")
 gi_mode = 2
 mesh = SubResource("ArrayMesh_m8iwd")
 
 [node name="Plate3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 0, 0, 0)
-material_override = ExtResource("3_5jur5")
+material_override = ExtResource("3_gm22r")
 gi_mode = 2
 mesh = SubResource("ArrayMesh_m8iwd")
 
 [node name="Plate4" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0, 0)
-material_override = ExtResource("3_5jur5")
+material_override = ExtResource("3_gm22r")
 gi_mode = 2
 mesh = SubResource("ArrayMesh_m8iwd")
 
 [node name="Plate5" type="MeshInstance3D" parent="."]
-material_override = ExtResource("5_6f4yd")
+material_override = ExtResource("3_gm22r")
 gi_mode = 2
 mesh = SubResource("ArrayMesh_m8iwd")
 
 [node name="Plate6" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
-material_override = ExtResource("5_6f4yd")
+material_override = ExtResource("3_gm22r")
 gi_mode = 2
 mesh = SubResource("ArrayMesh_m8iwd")
 
@@ -172,6 +170,3 @@ collision_mask = 16
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/occluder"]
 shape = SubResource("BoxShape3D_mns8q")
-
-[connection signal="on_remove" from="." to="passage_controller" method="_on_passage_on_remove"]
-[connection signal="type_set" from="." to="passage_controller" method="_on_passage_type_set"]

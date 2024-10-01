@@ -63,4 +63,4 @@ environment = ExtResource("3_d7swh")
 transform = Transform3D(0.0203048, 0.99508, 0.0969747, -0.995104, 0.0294983, -0.0943313, -0.0967278, -0.0945848, 0.990806, 0.19447, 0, 0)
 light_energy = 0.532
 light_indirect_energy = 0.0
-directional_shadow_max_distance = 322.5
+directional_shadow_max_distance = 2002.5

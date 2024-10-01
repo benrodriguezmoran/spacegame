@@ -95,11 +95,7 @@ func toggle_wall(blockRelative,state:bool=false,placeDoor=false, placeRotation=P
 			add_child(door)
 			doors[door] = checkDirection
 			door.position = walls[checkDirection].position
-			var temp = blockRelative.z
-			
-			door.basis =   walls[checkDirection].basis.rotated(blockRelative,placeRotation)
-			uiLog.p2 = str(blockRelative * placeRotation)
-			uiLog.p3 = str(door.rotation)
+			door.basis =  walls[checkDirection].basis.rotated(blockRelative,placeRotation)
 			return door
 		else:
 			var trash = doors.find_key(checkDirection)
@@ -108,7 +104,7 @@ func toggle_wall(blockRelative,state:bool=false,placeDoor=false, placeRotation=P
 			walls[checkDirection].visible = state
 			if !trash: return
 			trash.remove()
-	else:
+	elif !doors.has(checkDirection):
 		colliders[checkDirection].disabled = !state
 		walls[checkDirection].visible = state
 

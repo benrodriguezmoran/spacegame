@@ -1,5 +1,4 @@
 extends Label
-@onready var block_placer = $"../../interaction_racyast/block_placement"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

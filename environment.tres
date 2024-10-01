@@ -5,8 +5,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j2eqj"]
 shader = ExtResource("1_axdgw")
-shader_parameter/cameraSaturation = 1.0
-shader_parameter/camSat = 1.0
+shader_parameter/cameraSaturation = 0.25
+shader_parameter/camSat = 0.15
 shader_parameter/source_panorama = ExtResource("2_wuvpl")
 
 [sub_resource type="Sky" id="Sky_6s2ma"]
@@ -17,9 +17,7 @@ background_mode = 2
 background_energy_multiplier = 0.57
 sky = SubResource("Sky_6s2ma")
 sky_rotation = Vector3(6.28319, 0, 0)
-ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_sky_contribution = 0.65
 reflected_light_source = 2
 tonemap_white = 0.23
 ssr_max_steps = 512

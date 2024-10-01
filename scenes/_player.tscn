@@ -126,8 +126,8 @@ script = ExtResource("2_boukc")
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.653888, 0)
 light_energy = 8.227
-light_indirect_energy = 2.6
-light_size = 0.263
+light_indirect_energy = 7.933
+light_size = 1.0
 spot_range = 581.743
 spot_attenuation = 2.0
 spot_angle = 122.87
@@ -136,8 +136,8 @@ spot_angle_attenuation = 0.901251
 [node name="SpotLight3D2" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.653888, 0)
 light_energy = 8.227
-light_indirect_energy = 2.6
-light_size = 0.263
+light_indirect_energy = 7.933
+light_size = 1.0
 spot_range = 581.743
 spot_attenuation = 2.0
 spot_angle = 122.87
@@ -337,8 +337,6 @@ grow_vertical = 2
 texture = SubResource("CanvasTexture_a6loj")
 
 [connection signal="body_entered" from="." to="movement_component/walkState" method="_on_player_body_entered"]
-[connection signal="transitioned_state" from="builder_ray" to="builder_ray/block_placement" method="_on_interaction_raycast_transitioned_state"]
-[connection signal="transitioned_state" from="builder_ray" to="builder_ray/wall_tool" method="_on_interaction_raycast_transitioned_state"]
 [connection signal="transitioned_state" from="movement_component" to="movement_component/jetpackState" method="_on_movement_component_transitioned_state"]
 [connection signal="transitioned_state" from="movement_component" to="movement_component/walkState" method="_on_movement_component_transitioned_state"]
 [connection signal="hotbar_selection" from="player_UI" to="builder_ray" method="_on_player_ui_hotbar_selection"]

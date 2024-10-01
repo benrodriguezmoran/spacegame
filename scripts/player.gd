@@ -2,8 +2,8 @@ extends RigidBody3D
 @onready var light_3d: SpotLight3D = $SpotLight3D
 @onready var light_3d_2: SpotLight3D = $SpotLight3D2
 var state = true
-var energy:float = 4.0
-var max_energy = 4
+var energy:float = 1.0
+var max_energy = 1
 signal ui_velocity
 func _ready():
 	set_contact_monitor(true)

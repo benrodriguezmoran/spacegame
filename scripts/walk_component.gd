@@ -13,7 +13,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func movement_process(inputVector):
+func movement_process(inputVector, mouseInput):
 	if !walk_raycast.is_colliding(): return
 	floor = walk_raycast.get_collider()
 	var floorNormal = walk_raycast.get_collision_normal()
